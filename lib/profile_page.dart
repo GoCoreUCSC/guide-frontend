@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:guide_frontend/edit_profile.dart';
+
+import 'edit_profile.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -13,121 +14,137 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+
     return Scaffold(
       body: Container(
+        height: height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 60, left: 30),
+              padding: EdgeInsets.only(
+                  top: height * 0.065,
+                  left: height * 0.036,
+                  right: height * 0.036),
               child: Row(
                 children: [
-                  const Text(
+                  Text(
                     "Profile",
                     style: TextStyle(
-                      color: Color(0xFF0084BD),
-                      fontSize: 30,
+                      color: const Color(0xFF0084BD),
+                      fontSize: width * 0.076,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Expanded(child: Container()),
-                  Container(
-                    margin: const EdgeInsets.only(right: 30),
-                    child: const Icon(
-                      Icons.headphones_rounded,
-                      size: 27,
-                    ),
+                  Icon(
+                    Icons.headphones_rounded,
+                    size: width * 0.0689,
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.024),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
+              margin:
+                  EdgeInsets.only(left: width * 0.0509, right: width * 0.0509),
               width: double.maxFinite,
-              height: 130,
+              height: height * 0.16,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(width * 0.0509),
                 color: Colors.white,
                 boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          offset: const Offset(-10.0, 10.0),
-                          blurRadius: 20.0,
-                          spreadRadius: 4.0,
-                        ),],
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    offset: const Offset(-10.0, 10.0),
+                    blurRadius: 20.0,
+                    spreadRadius: 4.0,
+                  ),
+                ],
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 15, bottom: 15),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: AssetImage("images/dummy.png"),
-                      ),
-                      
-                      borderRadius: BorderRadius.circular(100),
-                      color: Color(0xFF0084BD),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Jack London",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF0084BD),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: width * 0.0381,
+                            bottom: width * 0.0381,
+                            top: width * 0.0381),
+                        width: height * 0.12,
+                        height: height * 0.12,
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage("images/dummy.png"),
+                          ),
+                          borderRadius: BorderRadius.circular(height * 0.12),
+                          color: Colors.white,
                         ),
                       ),
-                      Text(
-                        "jack.london@gmail.com",
-                        style: TextStyle(
-                          // shadows: [
-                          //   Shadow(
-                          //     offset: Offset(2, 2),
-                          //     blurRadius: 3.0,
-                          //     color: Colors.grey,
-                          //   ),
-                          //],
-                          fontSize: 15.0,
-                          color: Color(0xFF0084BD),
-                        ),
+                      SizedBox(width: width * 0.0509),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Jack London",
+                            style: TextStyle(
+                              fontSize: width * 0.055,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF0084BD),
+                            ),
+                          ),
+                          Text(
+                            "jack.london@gmail.com",
+                            style: TextStyle(
+                              // shadows: const [
+                              //   Shadow(
+                              //     offset: Offset(2, 2),
+                              //     blurRadius: 3.0,
+                              //     color: Colors.grey,
+                              //   ),
+                              // ],
+                              fontSize: width * 0.0365,
+                              color: const Color(0xFF0084BD),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(width: 30),
                   Container(
-                    padding: const EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.only(
+                        right: width * 0.0509, bottom: width * 0.0509),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 const EditProfile()));
                       },
-                      child: const Icon(
+                      child: Icon(
                         Icons.edit,
-                        color: Color(0xFF0084BD),
+                        color: const Color(0xFF0084BD),
+                        size: width * 0.055,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 25),
+            SizedBox(height: height * 0.0301),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
+              margin:
+                  EdgeInsets.only(left: width * 0.0509, right: width * 0.0509),
               width: double.maxFinite,
-              height: 260,
+              height: height * 0.32,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(height * 0.012),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -141,50 +158,56 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.068,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.person_outline_sharp,
-                            size: 40,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: const Text(
-                                "My Account",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                              margin: EdgeInsets.only(
+                                  left: width * 0.0254,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.person_outline_sharp,
+                                size: height * 0.0482,
+                                color: const Color(0xFF0084BD),
                               ),
                             ),
-                            const SizedBox(height: 2),
-                            const Text(
-                              "Make changes to your account",
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.grey,
-                              ),
+                            SizedBox(width: width * 0.0178),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: height * 0.012),
+                                  child: Text(
+                                    "My Account",
+                                    style: TextStyle(
+                                      fontSize: width * 0.0381,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: height * 0.0024),
+                                Text(
+                                  "Make changes to your account",
+                                  style: TextStyle(
+                                    fontSize: width * 0.0365,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        const SizedBox(width: 70),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 13),
+                          margin: EdgeInsets.only(right: width * 0.02),
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -201,53 +224,59 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: height * 0.012),
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.068,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.currency_pound,
-                            size: 40,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: const Text(
-                                "Payment",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF000000),
-                                ),
+                              margin: EdgeInsets.only(
+                                  left: width * 0.0254,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.currency_pound,
+                                size: height * 0.0482,
+                                color: const Color(0xFF0084BD),
                               ),
                             ),
-                            const SizedBox(height: 2),
-                            const Text(
-                              "Manage your payments",
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.grey,
-                              ),
+                            SizedBox(width: width * 0.0178),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: height * 0.012),
+                                  child: Text(
+                                    "Payment",
+                                    style: TextStyle(
+                                      fontSize: width * 0.0381,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: height * 0.0024),
+                                Text(
+                                  "Manage your payments",
+                                  style: TextStyle(
+                                    fontSize: width * 0.0365,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        const SizedBox(width: 118),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 13),
+                          margin: EdgeInsets.only(right: width * 0.02),
                           child: GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
@@ -264,53 +293,59 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: height * 0.012),
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.068,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.system_security_update_good_outlined,
-                            size: 40,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: const Text(
-                                "Two-Factor Authentication",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                              margin: EdgeInsets.only(
+                                  left: width * 0.0254,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.system_security_update_good_outlined,
+                                size: height * 0.0482,
+                                color: const Color(0xFF0084BD),
                               ),
                             ),
-                            const SizedBox(height: 2),
-                            const Text(
-                              "Further secure your account for safety",
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.grey,
-                              ),
+                            SizedBox(width: width * 0.0178),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: height * 0.012),
+                                  child: Text(
+                                    "Two-Factor Authentication",
+                                    style: TextStyle(
+                                      fontSize: width * 0.0381,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: height * 0.0024),
+                                Text(
+                                  "Further secure your account for safety",
+                                  style: TextStyle(
+                                    fontSize: width * 0.0365,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        const SizedBox(width: 21),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 13),
+                          margin: EdgeInsets.only(right: width * 0.02),
                           child: GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
@@ -327,53 +362,53 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: height * 0.012),
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.065,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 12, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.logout_rounded,
-                            size: 35,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: const Text(
-                                "Log-out",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                              margin: EdgeInsets.only(
+                                  left: width * 0.03,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.logout_rounded,
+                                size: height * 0.0482,
+                                color: const Color(0xFF0084BD),
                               ),
                             ),
-                            const SizedBox(height: 2),
-                            // const Text(
-                            //   "Further secure your account for safety",
-                            //   style: TextStyle(
-                            //     fontSize: 15.0,
-                            //     color: Colors.grey,
-                            //   ),
-                            // ),
+                            SizedBox(width: width * 0.0178),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: height * 0.012),
+                                  child: Text(
+                                    "Log-out",
+                                    style: TextStyle(
+                                      fontSize: width * 0.0381,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
-                        const SizedBox(width: 220),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 13),
+                          margin: EdgeInsets.only(
+                              right: width * 0.02, bottom: width * 0.03),
                           child: GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
@@ -393,22 +428,23 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.024),
             Container(
-              margin: const EdgeInsets.only(left: 20),
-              child: const Text(
+              margin: EdgeInsets.only(left: width * 0.0509),
+              child: Text(
                 'More',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: width * 0.0509,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.0180),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
+              margin:
+                  EdgeInsets.only(left: width * 0.0509, right: width * 0.0509),
               width: double.maxFinite,
-              height: 150,
+              height: height * 0.18,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -425,31 +461,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.06,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.question_mark,
-                            size: 30,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              child: const Text(
+                              margin: EdgeInsets.only(
+                                  left: width * 0.0254,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.question_mark,
+                                size: height * 0.043,
+                                color: const Color(0xFF0084BD),
+                              ),
+                            ),
+                            SizedBox(width: width * 0.0178),
+                            Container(
+                              child: Text(
                                 "My Account",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: width * 0.0381,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
@@ -457,9 +493,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(width: 195),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 15),
+                          margin: EdgeInsets.only(right: width * 0.02),
                           child: GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
@@ -478,31 +514,31 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.06,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.settings,
-                            size: 30,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              child: const Text(
+                              margin: EdgeInsets.only(
+                                  left: width * 0.0254,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.settings,
+                                size: height * 0.04,
+                                color: const Color(0xFF0084BD),
+                              ),
+                            ),
+                            SizedBox(width: width * 0.0178),
+                            Container(
+                              child: Text(
                                 "Settings",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: width * 0.0381,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
@@ -510,9 +546,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(width: 220),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 15),
+                          margin: EdgeInsets.only(right: width * 0.02),
                           child: GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
@@ -531,31 +567,31 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     width: double.maxFinite,
-                    height: 50,
+                    height: height * 0.06,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, bottom: 15, top: 10),
-                          width: 50,
-                          height: 50,
-                          child: const Icon(
-                            Icons.report_outlined,
-                            size: 30,
-                            color: Color(0xFF0084BD),
-                          ),
-                        ),
-                        const SizedBox(width: 7),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
                             Container(
-                              child: const Text(
+                              margin: EdgeInsets.only(
+                                  left: width * 0.0254,
+                                  bottom: width * 0.0381,
+                                  top: width * 0.0254),
+                              width: height * 0.0602,
+                              height: height * 0.0602,
+                              child: Icon(
+                                Icons.report_outlined,
+                                size: height * 0.04,
+                                color: const Color(0xFF0084BD),
+                              ),
+                            ),
+                            SizedBox(width: width * 0.0178),
+                            Container(
+                              child: Text(
                                 "About App",
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: width * 0.0381,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
@@ -563,9 +599,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(width: 205),
+                        // const SizedBox(width: 70),
                         Container(
-                          padding: const EdgeInsets.only(bottom: 15),
+                          margin: EdgeInsets.only(right: width * 0.02),
                           child: GestureDetector(
                             onTap: () {
                               // Navigator.of(context).push(MaterialPageRoute(
