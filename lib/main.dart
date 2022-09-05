@@ -15,31 +15,27 @@ import 'package:guide_frontend/signin.dart';
 //import 'package:frontend/selectactivitiesscreen3.dart';
 //import 'package:frontend/signin.dart';
 
-
-
 void main() {
-  runApp(
-     MaterialApp(
+  runApp(MaterialApp(
 
-    // theme: ThemeData().copyWith(
-    //     scaffoldBackgroundColor: Colors.white,
-    //     colorScheme: ThemeData().colorScheme.copyWith(primary: Color(0xFF0084BD)),
-    //   ),
-    theme: ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    colorScheme: ThemeData().colorScheme.copyWith(primary: Color(0xFF0084BD)),
-    fontFamily: 'Roboto',
-  ),
-    
-    debugShowCheckedModeBanner: false,
+      // theme: ThemeData().copyWith(
+      //     scaffoldBackgroundColor: Colors.white,
+      //     colorScheme: ThemeData().colorScheme.copyWith(primary: Color(0xFF0084BD)),
+      //   ),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme:
+            ThemeData().colorScheme.copyWith(primary: Color(0xFF0084BD)),
+        fontFamily: 'Roboto',
+      ),
+      debugShowCheckedModeBanner: false,
       //  home: Signin()
-     home:MyHomePage()
-    // home:Tours()
-    // home:Home()
-    // home:ExplorePage()
-    // home:MainPage()
-    // home: TouristHome()
-    // home: BookingPage()
-  ));
+      home: MainPageGuide()
+      // home:Tours()
+      // home:Home()
+      // home:ExplorePage()
+      // home:MainPage()
+      // home: TouristHome()
+      // home: BookingPage()
+      ));
 }
-
