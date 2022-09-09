@@ -29,8 +29,8 @@ void main() {
         fontFamily: 'Roboto',
       ),
       debugShowCheckedModeBanner: false,
-      //  home: Signin()
-      home: MainPageGuide()
+        home: Signin()
+      //home: MainPageGuide()
       // home:Tours()
       // home:Home()
       // home:ExplorePage()

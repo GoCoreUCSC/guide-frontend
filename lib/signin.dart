@@ -90,7 +90,7 @@ class _SigninState extends State<Signin> {
                   style: GoogleFonts.radioCanada(
                       fontWeight: FontWeight.bold,
                       fontSize: 45,
-                      color: Color(0xff1554F6)),
+                      color: Color.fromARGB(255, 4, 128, 185)),
                 ),
                 SizedBox(
                   height: 25,
@@ -117,11 +117,11 @@ class _SigninState extends State<Signin> {
                       hintText: 'Username',
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff1554F6)),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff1554F6)),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -157,11 +157,11 @@ class _SigninState extends State<Signin> {
                       hintText: 'Password',
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff1554F6)),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: Color(0xff1554F6)),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -258,7 +258,7 @@ class _SigninState extends State<Signin> {
                         ),
                         style: TextButton.styleFrom(
                           primary: Colors.white, //Text Color
-                          backgroundColor: Color(0xff1554F6),
+                          backgroundColor: Color.fromARGB(255, 4, 128, 185),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16.0)),
                         ),
@@ -288,7 +288,7 @@ class _SigninState extends State<Signin> {
                             "Sign Up",
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Color(0xff1554F6),
+                                color: Color.fromARGB(255, 4, 128, 185),
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
