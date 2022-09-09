@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:guide_frontend/services/authservice.dart';
 import 'package:guide_frontend/signin.dart';
-import 'package:guide_frontend/upload_document.dart';
+import 'package:guide_frontend/signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/src/rendering/flex.dart';
 //import 'activities.dart';
@@ -16,13 +16,15 @@ import 'package:flutter/src/rendering/flex.dart';
 // import 'package:frontend/user.dart';
 
 
-class Signup extends StatefulWidget {
-Signup({Key? key}) : super(key: key);
+class DocumentUpload extends StatefulWidget {
+DocumentUpload({Key? key}) : super(key: key);
   @override
-  _SignupState createState() => _SignupState();
+  _DocumentUploadState createState() => _DocumentUploadState();
 }
 
-class _SignupState extends State<Signup> {
+
+
+class _DocumentUploadState extends State<DocumentUpload> {
   final _formKey = GlobalKey<FormState>();
 
 // Future save() async {
@@ -40,7 +42,7 @@ class _SignupState extends State<Signup> {
 //   }
 
   // User user = User('', '');
-  var name, email, password, token, confirmPass,c_password, nic, address, contact_no;
+  var name, email, password, token, confirmPass,c_password,nic, address,contact_no;
   bool agree = false;
   
   @override
@@ -74,10 +76,10 @@ class _SignupState extends State<Signup> {
                     ),
                     
                       Text(
-                        "Sign up",
+                        "Welcome to GoCore",
                         style: GoogleFonts.radioCanada(
                             fontWeight: FontWeight.bold,
-                            fontSize: 45,
+                            fontSize: 38,
                             color: Color.fromARGB(255, 4, 128, 185)),
                       ),
                       SizedBox(
@@ -85,35 +87,35 @@ class _SignupState extends State<Signup> {
                       ),
 
                       Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
+                    padding: const EdgeInsets.fromLTRB(25, 5, 20, 0),
                     child: Row(
                       children: [
                         Text(
-                          "Already have an account ? ",
+                          "We would like to know more about you",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
                               color: Colors.black, fontWeight: FontWeight.bold),
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => Signin())
-                                    );
-                          },
-                          child: Text(
-                            "Sign In",
-                            style: TextStyle(
-                              fontSize: 16,
-                                color: Color.fromARGB(255, 4, 128, 185),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //         context,
+                        //         new MaterialPageRoute(
+                        //             builder: (context) => Signin())
+                        //             );
+                        //   },
+                        //   child: Text(
+                        //     "Sign In",
+                        //     style: TextStyle(
+                        //       fontSize: 16,
+                        //         color: Color.fromARGB(255, 4, 128, 185),
+                        //         fontWeight: FontWeight.bold),
+                        //   ),
+                        // ),
                       ],
                     )),
                     SizedBox(
-                        height: 15,
+                        height: 25,
                       ),
 
                       Padding( 
@@ -122,7 +124,7 @@ class _SignupState extends State<Signup> {
                           crossAxisAlignment:  CrossAxisAlignment.start,
                           children: [
                             Text(
-                          "Full Name",
+                          "Profile picture of you",
                           style: TextStyle(
                             fontSize: 16,
                               color: Colors.black, fontWeight: FontWeight.bold),
@@ -229,10 +231,10 @@ class _SignupState extends State<Signup> {
                               color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                         TextFormField(
-                          controller: TextEditingController(text: nic),
+                          controller: TextEditingController(text: name),
                           obscureText: false,
                           onChanged: (value){
-                            nic= value;
+                            name= value;
                           },
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -265,250 +267,28 @@ class _SignupState extends State<Signup> {
               ),
                           ]),
                       ),
-              Padding( 
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: Column(
-                          crossAxisAlignment:  CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                          "Address",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        TextFormField(
-                          controller: TextEditingController(text: address),
-                          obscureText: false,
-                          onChanged: (value){
-                            address= value;
-                          },
-                          validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return 'Enter Your Address';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Enter your address',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             
-                             ),
-                             
-              ),
-                          ]),
-                      ),
-                      Padding( 
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: Column(
-                          crossAxisAlignment:  CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                          "Contact No",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ), 
-                        TextFormField(
-                          controller: TextEditingController(text: contact_no),
-                          obscureText: false,
-                          onChanged: (value){
-                            contact_no= value;
-                          },
-                          validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return 'Enter Your Contact No';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Enter your contact no',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             
-                             ),
-                             
-              ),
-                          ]),
-                      ),
-                      
-              Padding( 
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: Column(
-                          crossAxisAlignment:  CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                          "Password",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        TextFormField(
-                          controller: TextEditingController(text: password),
-                          obscureText: true,
-                          onChanged: (value){
-                            password= value;
-                          },
-                          validator: (String? value) {
-                            confirmPass = value;
-                            if (value!.isEmpty) {
-                              return 'Enter a password';
-                            } else if (!RegExp(
-                                    r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$")
-                                .hasMatch(value)) {
-                              return 'Enter valid password';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             
-                             ),
-                             
-              ),
-                          ]),
-                      ),
-              Padding( 
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: Column(
-                          crossAxisAlignment:  CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                          "Confirm Password",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        TextFormField(
-                          controller: TextEditingController(text: c_password),
-                          obscureText: true,
-                          onChanged: (value){
-                            c_password= value;
-                          },
-                          validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return 'Confirm Password';
-                            } else if (confirmPass != value) {
-                              return 'Re-Enter New Password';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Confirm Password',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
-                             ),
-                             errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                             ),
-                             
-                             ),
-                             
-              ),
-                          ]),
-                      ),
-                      Padding(
-                    padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
-                    child: Row(
-                      children: [
-                        Material(
-                          child: Checkbox(
-                            value: agree,
-                            onChanged: (value) {
-                              setState(() {
-                                agree = value ?? false;
-                              });
-                            },
-                          ),
-                        ),
-                        Text(
-                          "I agree to the terms and conditions ",
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    )),
-                    Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
+              Padding(
+                    padding: const EdgeInsets.fromLTRB(115, 10, 115, 0),
                     child: Row(
                       children: [
                         Text(
-                          "Go to next page ",
+                          "Go Back ",
                           style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                         InkWell(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 new MaterialPageRoute(
-                                    builder: (context) => DocumentUpload())
-                                    );
+                                    builder: (context) => Signup()));
                           },
                           child: Text(
-                            "Upload photo",
+                            "Sign Up",
                             style: TextStyle(
-                              fontSize: 16,
+                                fontSize: 16,
                                 color: Color.fromARGB(255, 4, 128, 185),
                                 fontWeight: FontWeight.bold),
                           ),
@@ -516,8 +296,8 @@ class _SignupState extends State<Signup> {
                       ],
                     )),
                     SizedBox(
-                        height: 15,
-                      ),
+                        height: 20,
+                      ), 
                       Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 16),
                   // child: Container(
@@ -566,7 +346,7 @@ class _SignupState extends State<Signup> {
                                 });
                               } 
                             },
-                            child: Text("Sign Up", style: TextStyle(fontSize: 20),),
+                            child: Text("Proceed to Sign In", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(
                               primary: Colors.white,  //Text Color
                               backgroundColor: Color.fromARGB(255, 4, 128, 185),
@@ -577,9 +357,7 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                 ),
-                SizedBox(
-                        height: 10,
-                      ), 
+                
                 //     Padding(
                 //   padding: EdgeInsets.fromLTRB(55, 16, 16, 0),
                 //   // child: Container(
