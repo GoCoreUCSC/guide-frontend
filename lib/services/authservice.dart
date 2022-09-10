@@ -29,8 +29,7 @@ class AuthService{
     }
   }
 
-
-  addUser(name,email,password, nic, address, contact_no,base64Image) async {
+addUser(name,email,password, nic, address, contact_no,base64Image) async {
       return await dio.post(
         'https://gocore.herokuapp.com/addguide', 
         data: {
