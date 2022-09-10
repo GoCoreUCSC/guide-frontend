@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:guide_frontend/services/authservice.dart';
 import 'package:guide_frontend/signin.dart';
-import 'package:guide_frontend/upload_document.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/src/rendering/flex.dart';
 
