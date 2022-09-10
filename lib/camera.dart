@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:guide_frontend/document.dart';
 import 'package:guide_frontend/signin.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
@@ -109,25 +110,25 @@ class _HomeState extends State<Home> {
       print(e.message);
       print(e.request);
     }
-                             AuthService().addUser(name, email, password, nic, address, contact_no, base64Image);
-                      //        .then((val) {
-                      //            Fluttertoast.showToast(
-                      //             msg: val.data['msg'],
-                      //             toastLength: Toast.LENGTH_SHORT,
-                      //             gravity: ToastGravity.BOTTOM,
-                      //             timeInSecForIosWeb: 1,
-                      //             backgroundColor: Colors.green,
-                      //             textColor:Colors.white,
-                      //             fontSize:16.0
-                      // );
-                                // },
+                      //        AuthService().addUser(name, email, password, nic, address, contact_no, base64Image);
+                      // //        .then((val) {
+                      // //            Fluttertoast.showToast(
+                      // //             msg: val.data['msg'],
+                      // //             toastLength: Toast.LENGTH_SHORT,
+                      // //             gravity: ToastGravity.BOTTOM,
+                      // //             timeInSecForIosWeb: 1,
+                      // //             backgroundColor: Colors.green,
+                      // //             textColor:Colors.white,
+                      // //             fontSize:16.0
+                      // // );
+                      //           // },
                                 Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Signin()
+                                MaterialPageRoute(builder: (context) => Document(name, email, password, nic, address, contact_no, base64Image)
                                 ));
                               } 
                       },
-                      child: const Text('Sign Up', style: TextStyle(fontSize: 18))
+                      child: const Text('Continue', style: TextStyle(fontSize: 18))
                   ),
                 )
               ],

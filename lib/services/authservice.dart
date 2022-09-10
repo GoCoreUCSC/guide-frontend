@@ -30,7 +30,7 @@ class AuthService{
   }
 
 
-  addUser(name,email,nic, address,contact_no, password,base64Image) async {
+  addUser(name,email,password, nic, address,contact_no,base64Image, certification) async {
       return await dio.post(
         'https://gocore.herokuapp.com/addguide', 
         data: {
@@ -41,6 +41,7 @@ class AuthService{
         "contact_no": contact_no,
         "password": password,
         "image": base64Image,
+        "certification": certification,
 
       }, options: Options(contentType: Headers.formUrlEncodedContentType)
       );

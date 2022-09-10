@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:guide_frontend/document.dart';
 import 'package:guide_frontend/launchscreen.dart';
 import 'package:guide_frontend/main_page.dart';
 import 'package:guide_frontend/signin.dart';
@@ -42,5 +43,6 @@ void main() {
       // home: BookingPage()
       //  home: Camera()
       // home: Home()
+      //  home: Document()
       ));
 }
