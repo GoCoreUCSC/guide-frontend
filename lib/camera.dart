@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:guide_frontend/signin.dart';
+import 'package:guide_frontend/welcome_screen.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -36,104 +37,154 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Capturing Images'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if(imageFile != null)
-              Container(
-                width: 640,
-                height: 480,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  image: DecorationImage(
-                    image: FileImage(imageFile!),
-                    fit: BoxFit.cover
-                  ),
-                  border: Border.all(width: 8, color: Colors.black),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              )
-            else
-              Container(
-                width: 640,
-                height: 480,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(width: 8, color: Colors.black12),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: const Text('Image should appear here', style: TextStyle(fontSize: 26),),
-              ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
+      // appBar: AppBar(
+      //   title: const Text('Capturing Images'),
+      //   centerTitle: true,
+      // ),
+      body: Column(
+        
+        children: [
+          const SizedBox(
+                        height: 35,
+                      ),  
+                      Container(
+                      padding: EdgeInsets.only(right:300.0),
+                      child: Image.asset('images/withoutSlogan.png',
+                          height: 100, width: 150, ),
+                    ),
+                    
+                      Container(
+                        padding: EdgeInsets.only(left: 20, top: 0,right: 20, bottom: 0,),
+                        child: const Text(
+                          "We would like to have a profile photo of you",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                          
+                              color: Color.fromARGB(255, 4, 128, 185)),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: ()=> getImage(source: ImageSource.camera),
-                      child: const Text('Capture Image', style: TextStyle(fontSize: 18))
+                if(imageFile != null)
+                  Container(
+                    width: 300,
+                    height: 350,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      image: DecorationImage(
+                        image: FileImage(imageFile!),
+                        fit: BoxFit.cover
+                      ),
+                      border: Border.all(width: 8, color: Colors.black),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  )
+                else
+                  Container(
+                    width: 300,
+                    height: 350,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      border: Border.all(width: 8, color: Colors.black12),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: const Text(
+                      'Photo should appear here', 
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 26),),
                   ),
+                const SizedBox(
+                  height: 30,
                 ),
-                const SizedBox(width: 20,),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: ()=> getImage(source: ImageSource.gallery),
-                      child: const Text('Select Image', style: TextStyle(fontSize: 18))
-                  ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                              onPressed: ()=> getImage(source: ImageSource.camera),
+                              child: const Text('Capture Photo', style: TextStyle(fontSize: 18))
+                          ),
+                        ),
+                        const SizedBox(width: 20,),
+                        Expanded(
+                          child: ElevatedButton(
+                              onPressed: ()=> getImage(source: ImageSource.gallery),
+                              child: const Text('Select Photo', style: TextStyle(fontSize: 18))
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                    SizedBox(height: 30,),
+          Container(
+            margin: const EdgeInsets.all(5),
+              width: 290,
+              height: 50,
+            child: ElevatedButton(
+                            onPressed: () 
+                            async {
+                              {
+                                try {
+                                  //  print(imageFile!.path);
+                                CloudinaryResponse response = await cloudinary.uploadFile(
+                                        CloudinaryFile.fromFile(imageFile!.path, resourceType: CloudinaryResourceType.Image),
+                                );
+                                setState(() {
+                                      base64Image=response.secureUrl;
+                                      });
+                                
+                                        print(response.secureUrl);
+                                } on CloudinaryException catch (e) {
+                                      print(e.message);
+                                      print(e.request);
+                                }
+                            AuthService().addUser(name, email, password, nic, address, contact_no, base64Image);
+                            //        .then((val) {
+                            //            Fluttertoast.showToast(
+                            //             msg: val.data['msg'],
+                            //             toastLength: Toast.LENGTH_SHORT,
+                            //             gravity: ToastGravity.BOTTOM,
+                            //             timeInSecForIosWeb: 1,
+                            //             backgroundColor: Colors.green,
+                            //             textColor:Colors.white,
+                            //             fontSize:16.0
+                            // );
+                                      // },
+                                      Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Welcome()
+                                      ));
+                                    } 
+                            },
+                            //child: const Text('Sign Up', style: TextStyle(fontSize: 18))
+                            child: Text("Sign Up", style: TextStyle(fontSize: 25),),
+                              style: TextButton.styleFrom(
+                                primary: Colors.white,  //Text Color
+                                
+                                backgroundColor: Color.fromARGB(255, 4, 128, 185),
+                                shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                              ),
+                        ),
+          ),
+                    
+                  ],
                 ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () 
-                      async {
-                        {
-                          try {
-                            //  print(imageFile!.path);
-    CloudinaryResponse response = await cloudinary.uploadFile(
-        CloudinaryFile.fromFile(imageFile!.path, resourceType: CloudinaryResourceType.Image),
-    );
-    setState(() {
-       base64Image=response.secureUrl;
-      });
-    
-        print(response.secureUrl);
-    } on CloudinaryException catch (e) {
-      print(e.message);
-      print(e.request);
-    }
-                             AuthService().addUser(name, email, password, nic, address, contact_no, base64Image);
-                      //        .then((val) {
-                      //            Fluttertoast.showToast(
-                      //             msg: val.data['msg'],
-                      //             toastLength: Toast.LENGTH_SHORT,
-                      //             gravity: ToastGravity.BOTTOM,
-                      //             timeInSecForIosWeb: 1,
-                      //             backgroundColor: Colors.green,
-                      //             textColor:Colors.white,
-                      //             fontSize:16.0
-                      // );
-                                // },
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Signin()
-                                ));
-                              } 
-                      },
-                      child: const Text('Sign Up', style: TextStyle(fontSize: 18))
-                  ),
-                )
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
