@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:guide_frontend/document.dart';
 import 'package:guide_frontend/signin.dart';
 import 'package:guide_frontend/welcome_screen.dart';
 import 'package:path/path.dart';
@@ -181,6 +182,46 @@ class _HomeState extends State<Home> {
                     
                   ],
                 ),
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () 
+                      async {
+                        {
+                          try {
+                            //  print(imageFile!.path);
+    CloudinaryResponse response = await cloudinary.uploadFile(
+        CloudinaryFile.fromFile(imageFile!.path, resourceType: CloudinaryResourceType.Image),
+    );
+    setState(() {
+       base64Image=response.secureUrl;
+      });
+    
+        print(response.secureUrl);
+    } on CloudinaryException catch (e) {
+      print(e.message);
+      print(e.request);
+    }
+                      //        AuthService().addUser(name, email, password, nic, address, contact_no, base64Image);
+                      // //        .then((val) {
+                      // //            Fluttertoast.showToast(
+                      // //             msg: val.data['msg'],
+                      // //             toastLength: Toast.LENGTH_SHORT,
+                      // //             gravity: ToastGravity.BOTTOM,
+                      // //             timeInSecForIosWeb: 1,
+                      // //             backgroundColor: Colors.green,
+                      // //             textColor:Colors.white,
+                      // //             fontSize:16.0
+                      // // );
+                      //           // },
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Document(name, email, password, nic, address, contact_no, base64Image)
+                                ));
+                              } 
+                      },
+                      child: const Text('Continue', style: TextStyle(fontSize: 18))
+                  ),
+                )
               ],
             ),
           ),
