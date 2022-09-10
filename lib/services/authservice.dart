@@ -29,16 +29,28 @@ class AuthService{
     }
   }
 
-  addUser(name,email, nic, address,contact_no, password) async {
+
+  addUser(name,email,nic, address,contact_no, password,base64Image) async {
       return await dio.post(
-        'https://gocore.herokuapp.com/adduser', 
+        'https://gocore.herokuapp.com/addguide', 
         data: {
         "name": name,
         "email": email,
-        "nic": nic,
+         "nic": nic,
         "address": address,
         "contact_no": contact_no,
-        "password": password
+        "password": password,
+        "image": base64Image,
+
+      }, options: Options(contentType: Headers.formUrlEncodedContentType)
+      );
+      }
+
+      addPicture(base64Image) async {
+      return await dio.post(
+        'https://gocore.herokuapp.com/addpicture', 
+        data: {
+        "image": base64Image,
       }, options: Options(contentType: Headers.formUrlEncodedContentType)
       );
       }

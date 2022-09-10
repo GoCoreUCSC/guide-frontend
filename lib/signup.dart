@@ -10,6 +10,8 @@ import 'package:guide_frontend/signin.dart';
 import 'package:guide_frontend/upload_document.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/src/rendering/flex.dart';
+
+import 'camera.dart';
 //import 'activities.dart';
 // import 'package:frontend/signup.dart';
 // import 'package:frontend/dashboard.dart';
@@ -499,11 +501,12 @@ class _SignupState extends State<Signup> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => DocumentUpload())
-                                    );
+                            // Navigator.push(
+                            //     context,
+                            //     new MaterialPageRoute(
+                            //         builder: (context) => Home( name, email, password, token, nic, address, contact_no))
+                            //         );
+
                           },
                           child: Text(
                             "Upload photo",
@@ -545,28 +548,33 @@ class _SignupState extends State<Signup> {
                         height: 50,
                         width: 300,
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () { Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) => Home( name, email, password, nic, address, contact_no))
+                                    );
                             // if (_formKey.currentState!.validate()) {
                             //   print("ok");
                             //   // save();
                             //  } else {
                             //     print("not ok");
                             //   }
-                            {
-                             AuthService().addUser(name, email, nic, address,contact_no, password).then((val) {
-                                 Fluttertoast.showToast(
-                                  msg: val.data['msg'],
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
-                                  textColor:Colors.white,
-                                  fontSize:16.0
-                      );
-                                });
-                              } 
+                      //       {
+                      //        AuthService().addUser(name, email, nic, address,contact_no, password).then((val) {
+                      //            Fluttertoast.showToast(
+                      //             msg: val.data['msg'],
+                      //             toastLength: Toast.LENGTH_SHORT,
+                      //             gravity: ToastGravity.BOTTOM,
+                      //             timeInSecForIosWeb: 1,
+                      //             backgroundColor: Colors.green,
+                      //             textColor:Colors.white,
+                      //             fontSize:16.0
+                      // );
+                      //           });
+                      //         } 
+
                             },
-                            child: Text("Sign Up", style: TextStyle(fontSize: 20),),
+                            child: Text("Continue", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(
                               primary: Colors.white,  //Text Color
                               backgroundColor: Color.fromARGB(255, 4, 128, 185),
