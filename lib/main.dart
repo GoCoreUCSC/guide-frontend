@@ -32,6 +32,7 @@ void main() {
         fontFamily: 'Roboto',
       ),
       debugShowCheckedModeBanner: false,
+
        home: Signin()
       // home: MainPageGuide()
       // home:Tours()
