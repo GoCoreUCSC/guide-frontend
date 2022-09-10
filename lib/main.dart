@@ -32,13 +32,8 @@ void main() {
         fontFamily: 'Roboto',
       ),
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
-        home: Signin()
-      //home: MainPageGuide()
-=======
        home: Signin()
       // home: MainPageGuide()
->>>>>>> 453430c (modify mobile guide-signup)
       // home:Tours()
       // home:Home()
       // home:ExplorePage()
