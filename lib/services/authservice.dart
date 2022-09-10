@@ -36,7 +36,7 @@ class AuthService{
         data: {
         "name": name,
         "email": email,
-         "nic": nic,
+        "nic": nic,
         "address": address,
         "contact_no": contact_no,
         "password": password,

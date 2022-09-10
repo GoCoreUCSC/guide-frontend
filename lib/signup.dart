@@ -506,7 +506,6 @@ class _SignupState extends State<Signup> {
                             //     new MaterialPageRoute(
                             //         builder: (context) => Home( name, email, password, token, nic, address, contact_no))
                             //         );
-
                           },
                           child: Text(
                             "Upload photo",
@@ -572,7 +571,6 @@ class _SignupState extends State<Signup> {
                       // );
                       //           });
                       //         } 
-
                             },
                             child: Text("Continue", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(
