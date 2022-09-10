@@ -332,19 +332,19 @@ class _DocumentUploadState extends State<DocumentUpload> {
                             //  } else {
                             //     print("not ok");
                             //   }
-                            {
-                             AuthService().addUser(name, email, nic, address,contact_no, password).then((val) {
-                                 Fluttertoast.showToast(
-                                  msg: val.data['msg'],
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
-                                  textColor:Colors.white,
-                                  fontSize:16.0
-                      );
-                                });
-                              } 
+                      //       {
+                      //        AuthService().addUser(name, email, nic, address,contact_no, password).then((val) {
+                      //            Fluttertoast.showToast(
+                      //             msg: val.data['msg'],
+                      //             toastLength: Toast.LENGTH_SHORT,
+                      //             gravity: ToastGravity.BOTTOM,
+                      //             timeInSecForIosWeb: 1,
+                      //             backgroundColor: Colors.green,
+                      //             textColor:Colors.white,
+                      //             fontSize:16.0
+                      // );
+                      //           });
+                      //         } 
                             },
                             child: Text("Proceed to Sign In", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(

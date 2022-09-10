@@ -66,9 +66,7 @@ class _SignupState extends State<Signup> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                    SizedBox(
-                        height: 10,
-                      ),  
+                      
                       Container(
                       padding: EdgeInsets.only(right:300.0),
                       child: Image.asset('images/withoutSlogan.png',
@@ -577,7 +575,7 @@ class _SignupState extends State<Signup> {
                               primary: Colors.white,  //Text Color
                               backgroundColor: Color.fromARGB(255, 4, 128, 185),
                               shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
+                              borderRadius: BorderRadius.circular(10)),
                             ),
                           ),
                       ),

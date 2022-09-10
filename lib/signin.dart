@@ -260,7 +260,7 @@ class _SigninState extends State<Signin> {
                           primary: Colors.white, //Text Color
                           backgroundColor: Color.fromARGB(255, 4, 128, 185),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0)),
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
                     ),
