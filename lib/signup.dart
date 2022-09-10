@@ -9,6 +9,8 @@ import 'package:guide_frontend/services/authservice.dart';
 import 'package:guide_frontend/signin.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/src/rendering/flex.dart';
+
+import 'camera.dart';
 //import 'activities.dart';
 // import 'package:frontend/signup.dart';
 // import 'package:frontend/dashboard.dart';
@@ -39,21 +41,22 @@ class _SignupState extends State<Signup> {
 //   }
 
   // User user = User('', '');
-  var name, email, password, token, confirmPass,c_password;
+  var name, email, password, token, confirmPass,c_password, nic, address, contact_no;
   bool agree = false;
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
+      body: ListView(
+        scrollDirection: Axis.vertical,
         children: [
-          Positioned(
-            bottom: 25,
-            child: SvgPicture.asset('images/top.svg',width:350, height:150 ,)),
-            Positioned(
-            bottom: 0,
-            child: SvgPicture.asset('images/top1.svg',width:350, height:100 ,)),
+          // Positioned(
+          //   bottom: 25,
+          //   child: SvgPicture.asset('images/top.svg',width:350, height:150 ,)),
+          //   Positioned(
+          //   bottom: 0,
+          //   child: SvgPicture.asset('images/top1.svg',width:350, height:100 ,)),
             Container(
               // alignment: Alignment.center,
                 child: Form(
@@ -63,7 +66,7 @@ class _SignupState extends State<Signup> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                     SizedBox(
-                        height: 30,
+                        height: 10,
                       ),  
                       Container(
                       padding: EdgeInsets.only(right:300.0),
@@ -72,18 +75,61 @@ class _SignupState extends State<Signup> {
                     ),
                     
                       Text(
-                        "Create Account",
+                        "Sign up",
                         style: GoogleFonts.radioCanada(
                             fontWeight: FontWeight.bold,
-                            fontSize: 40,
-                            color: Color(0xff1554F6)),
+                            fontSize: 45,
+                            color: Color.fromARGB(255, 4, 128, 185)),
                       ),
                       SizedBox(
                         height: 25,
                       ),
+
+                      Padding(
+                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Already have an account ? ",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) => Signin())
+                                    );
+                          },
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(
+                              fontSize: 16,
+                                color: Color.fromARGB(255, 4, 128, 185),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    )),
+                    SizedBox(
+                        height: 15,
+                      ),
+
                       Padding( 
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: TextFormField(
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "Full Name",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                          
+                         TextFormField(
                           controller: TextEditingController(text: name),
                           obscureText: false,
                           onChanged: (value){
@@ -91,20 +137,20 @@ class _SignupState extends State<Signup> {
                           },
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Enter Name';
+                              return 'Enter Your Name';
                             } else {
                               return null;
                             }
                           },
                           decoration: InputDecoration(
-                            hintText: 'Name',
+                            hintText: 'Enter your name',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -118,10 +164,21 @@ class _SignupState extends State<Signup> {
                              ),
                              
               ),
+              ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: TextFormField(
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "Email",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        TextFormField(
                           controller: TextEditingController(text: email),
                           onChanged: (value){
                             email= value;
@@ -138,14 +195,14 @@ class _SignupState extends State<Signup> {
                             }
                           }, 
                           decoration: InputDecoration(
-                            hintText: 'Email',
+                            hintText: 'Example@gamil.com',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -159,10 +216,165 @@ class _SignupState extends State<Signup> {
                              ),
                              
               ),
+                          ]),
                       ),
               Padding( 
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: TextFormField(
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "NIC",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        TextFormField(
+                          controller: TextEditingController(text: nic),
+                          obscureText: false,
+                          onChanged: (value){
+                            nic= value;
+                          },
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Your NIC';
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Enter your NIC',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
+                             ),
+                             focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
+                             ),
+                             errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                             ),
+                             focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                             ),
+                             
+                             ),
+                             
+              ),
+                          ]),
+                      ),
+              Padding( 
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "Address",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        TextFormField(
+                          controller: TextEditingController(text: address),
+                          obscureText: false,
+                          onChanged: (value){
+                            address= value;
+                          },
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Your Address';
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Enter your address',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
+                             ),
+                             focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
+                             ),
+                             errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                             ),
+                             focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                             ),
+                             
+                             ),
+                             
+              ),
+                          ]),
+                      ),
+                      Padding( 
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "Contact No",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ), 
+                        TextFormField(
+                          controller: TextEditingController(text: contact_no),
+                          obscureText: false,
+                          onChanged: (value){
+                            contact_no= value;
+                          },
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Enter Your Contact No';
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Enter your contact no',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
+                             ),
+                             focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
+                             ),
+                             errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                             ),
+                             focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                             ),
+                             
+                             ),
+                             
+              ),
+                          ]),
+                      ),
+                      
+              Padding( 
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "Password",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        TextFormField(
                           controller: TextEditingController(text: password),
                           obscureText: true,
                           onChanged: (value){
@@ -184,11 +396,11 @@ class _SignupState extends State<Signup> {
                             hintText: 'Password',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -202,10 +414,20 @@ class _SignupState extends State<Signup> {
                              ),
                              
               ),
+                          ]),
                       ),
               Padding( 
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        child: TextFormField(
+                        child: Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                          "Confirm Password",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        TextFormField(
                           controller: TextEditingController(text: c_password),
                           obscureText: true,
                           onChanged: (value){
@@ -224,11 +446,11 @@ class _SignupState extends State<Signup> {
                             hintText: 'Confirm Password',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Color(0xff1554F6)),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
                              ),
                              errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -242,6 +464,7 @@ class _SignupState extends State<Signup> {
                              ),
                              
               ),
+                          ]),
                       ),
                       Padding(
                     padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
@@ -265,6 +488,37 @@ class _SignupState extends State<Signup> {
                         ),
                       ],
                     )),
+                    Padding(
+                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Go to next page ",
+                          style: TextStyle(
+                            fontSize: 16,
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     new MaterialPageRoute(
+                            //         builder: (context) => Home( name, email, password, token, nic, address, contact_no))
+                            //         );
+                          },
+                          child: Text(
+                            "Upload photo",
+                            style: TextStyle(
+                              fontSize: 16,
+                                color: Color.fromARGB(255, 4, 128, 185),
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    )),
+                    SizedBox(
+                        height: 15,
+                      ),
                       Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 16),
                   // child: Container(
@@ -292,31 +546,35 @@ class _SignupState extends State<Signup> {
                         height: 50,
                         width: 300,
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () { Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                    builder: (context) => Home( name, email, password, nic, address, contact_no))
+                                    );
                             // if (_formKey.currentState!.validate()) {
                             //   print("ok");
                             //   // save();
                             //  } else {
                             //     print("not ok");
                             //   }
-                            {
-                             AuthService().addUser(name, email, password).then((val) {
-                                 Fluttertoast.showToast(
-                                  msg: val.data['msg'],
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
-                                  textColor:Colors.white,
-                                  fontSize:16.0
-                      );
-                                });
-                              } 
+                      //       {
+                      //        AuthService().addUser(name, email, nic, address,contact_no, password).then((val) {
+                      //            Fluttertoast.showToast(
+                      //             msg: val.data['msg'],
+                      //             toastLength: Toast.LENGTH_SHORT,
+                      //             gravity: ToastGravity.BOTTOM,
+                      //             timeInSecForIosWeb: 1,
+                      //             backgroundColor: Colors.green,
+                      //             textColor:Colors.white,
+                      //             fontSize:16.0
+                      // );
+                      //           });
+                      //         } 
                             },
-                            child: Text("Sign Up", style: TextStyle(fontSize: 20),),
+                            child: Text("Continue", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(
                               primary: Colors.white,  //Text Color
-                              backgroundColor: Color(0xff1554F6),
+                              backgroundColor: Color.fromARGB(255, 4, 128, 185),
                               shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16.0)),
                             ),
@@ -324,34 +582,9 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Already have an account ? ",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => Signin())
-                                    );
-                          },
-                          child: Text(
-                            "Sign In",
-                            style: TextStyle(
-                              fontSize: 16,
-                                color: Color(0xff1554F6),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
+                SizedBox(
+                        height: 10,
+                      ), 
                 //     Padding(
                 //   padding: EdgeInsets.fromLTRB(55, 16, 16, 0),
                 //   // child: Container(
