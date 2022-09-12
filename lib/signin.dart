@@ -106,7 +106,7 @@ class _SigninState extends State<Signin> {
                       if (value!.isEmpty) {
                         return 'Enter your email';
                       } else {
-                        return 'Enter a valid email';
+                        return null;
                       }
                     },
                     decoration: InputDecoration(

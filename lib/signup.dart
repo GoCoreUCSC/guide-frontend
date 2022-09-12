@@ -407,8 +407,14 @@ class _SignupState extends State<Signup> {
                           validator: (String? value) {
                             if (value!.isEmpty) {
                               return 'Enter your Contact No';
-                            } else {
+                            } 
+                            else if (RegExp(
+                                    r"^(?:7|0|(?:\+94))[0-9]{9,10}$")
+                                .hasMatch(value)) {
                               return null;
+                            }
+                            else {
+                              return "Enter a valid Contact No.";
                             }
                           },
                           decoration: InputDecoration(

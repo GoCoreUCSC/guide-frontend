@@ -171,8 +171,19 @@ class _HomeState extends State<Home> {
             child: ElevatedButton(
                             onPressed: () 
                             async {
-                              {
-                                try {
+                                if(imageFile==null)
+                                {
+                                  Fluttertoast.showToast(
+                                  msg: "Upload an image of you",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  backgroundColor: Colors.red,
+                                  textColor:Colors.white,
+                                  fontSize:16.0
+                                );
+                                }
+                                else
+                                {try {
                                   //  print(imageFile!.path);
                                 CloudinaryResponse response = await cloudinary.uploadFile(
                                         CloudinaryFile.fromFile(imageFile!.path, resourceType: CloudinaryResourceType.Image),
@@ -186,12 +197,13 @@ class _HomeState extends State<Home> {
                                       print(e.message);
                                       print(e.request);
                                 }
+
                            
                                 Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Document(name, email, password, nic, address, contact_no, base64Image)
                                 ));
-                                    } 
+                               }     
                             },
                             child: Text("Continue", style: TextStyle(fontSize: 20),),
                               style: TextButton.styleFrom(
