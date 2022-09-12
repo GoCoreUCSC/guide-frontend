@@ -22,17 +22,17 @@ class _WelcomeState extends State<Welcome> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
 
           Container(
-            padding: EdgeInsets.only(left: 20, top: 0,right: 20, bottom: 0,),
+            padding: EdgeInsets.only(left: 40, top: 0,right: 20, bottom: 0,),
             child: Text(
                             "Welcome to GoCore",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 45,
+                                fontSize: 42,
                                 color: Color.fromARGB(255, 4, 128, 185)),
                           ),
           ),
@@ -45,8 +45,9 @@ class _WelcomeState extends State<Welcome> {
                       
                           child: Text(
                             "Thank You for Signing Up with us",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 20,
                                 color: Colors.black, fontWeight: FontWeight.bold),
                           ),
                           ),
@@ -57,6 +58,7 @@ class _WelcomeState extends State<Welcome> {
                 padding: EdgeInsets.all(20),
                 child: Image.asset(
                 'images/withSlogan.png',
+                height: 300, width: 300,
                 //fit: BoxFit.fitHeight,
                 ),
               ),
@@ -88,7 +90,7 @@ class _WelcomeState extends State<Welcome> {
                   style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w700,
                       )),
               ),
             ),

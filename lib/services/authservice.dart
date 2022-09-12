@@ -31,6 +31,7 @@ class AuthService{
 
 
   addUser(name,email,password, nic, address,contact_no,base64Image, certification) async {
+      try{
       return await dio.post(
         'https://gocore.herokuapp.com/addguide', 
         data: {
@@ -45,6 +46,17 @@ class AuthService{
 
       }, options: Options(contentType: Headers.formUrlEncodedContentType)
       );
+      }
+      on DioError catch(e) {
+      Fluttertoast.showToast(
+        msg: e.response!.data['msg'],
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor:Colors.white,
+        fontSize:16.0
+        );
+       }
       }
 
       addPicture(base64Image) async {

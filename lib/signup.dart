@@ -25,6 +25,7 @@ Signup({Key? key}) : super(key: key);
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
+  
 
 // Future save() async {
 //     var res = await http.post("http://localhost:3000/signin",
@@ -41,13 +42,69 @@ class _SignupState extends State<Signup> {
 //   }
 
   // User user = User('', '');
-  var name, email, password, token, confirmPass,c_password, nic, address, contact_no;
+  var name, email, password, token, c_password, nic, address, contact_no;
   bool agree = false;
+  RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
+  double password_strength = 0;
+  bool _isVisible = false;
+  // 0: No password
+  // 1/5: Weak
+  // 2/5: Medium
+  // 3/5: Strong
+  // 4/5: Strong
+  //   1:   Great
+
+  //A function that validate user entered password
+  bool validatePassword(String pass){
+    String _password = pass.trim();
+
+    if(_password.isEmpty){
+      setState(() {
+        password_strength = 0;
+        _isVisible= true;
+      });
+    }else if(_password.length < 2 ){
+      setState(() {
+        password_strength = 1 / 5;
+        _isVisible= true;
+      });
+      }else if(_password.length < 4){
+      setState(() {
+        password_strength = 2 / 5;
+        _isVisible= true;
+      });
+    }else if(_password.length < 5){
+      setState(() {
+        password_strength = 3 / 5;
+        _isVisible= true;
+      });
+    }else if(_password.length < 6){
+      setState(() {
+        password_strength = 4 / 5;
+        _isVisible= true;
+      });  
+    }else{
+      if(pass_valid.hasMatch(_password)){
+        setState(() {
+          password_strength = 5 / 5;
+          _isVisible= false;
+        });
+        return true;
+      }else{
+        setState(() {
+          password_strength = 4 / 5;
+          _isVisible= true;
+        });
+        return false;
+      }
+    }
+    return false;
+  }
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
@@ -135,12 +192,15 @@ class _SignupState extends State<Signup> {
                           },
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Enter Your Name';
+                              return 'Enter your Name';
                             } else {
                               return null;
                             }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             hintText: 'Enter your name',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -183,7 +243,7 @@ class _SignupState extends State<Signup> {
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter Email';
+                              return 'Enter your Email';
                             } else if (RegExp(
                                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value)) {
@@ -194,6 +254,9 @@ class _SignupState extends State<Signup> {
                           }, 
                           decoration: InputDecoration(
                             hintText: 'Example@gamil.com',
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(color: Color.fromARGB(255, 4, 128, 185)),
@@ -235,12 +298,21 @@ class _SignupState extends State<Signup> {
                           },
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Enter Your NIC';
-                            } else {
+                              return 'Enter your NIC';
+                            } 
+                            else if (RegExp(
+                                    r"^([0-9]{9}[x|X|v|V]|[0-9]{12})$")
+                                .hasMatch(value)) {
                               return null;
+                            }
+                            else {
+                              return "Enter a valid NIC";
                             }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             hintText: 'Enter your NIC',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -283,12 +355,15 @@ class _SignupState extends State<Signup> {
                           },
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Enter Your Address';
+                              return 'Enter your Address';
                             } else {
                               return null;
                             }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             hintText: 'Enter your address',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -331,12 +406,15 @@ class _SignupState extends State<Signup> {
                           },
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Enter Your Contact No';
+                              return 'Enter your Contact No';
                             } else {
                               return null;
                             }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             hintText: 'Enter your contact no',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -379,18 +457,23 @@ class _SignupState extends State<Signup> {
                             password= value;
                           },
                           validator: (String? value) {
-                            confirmPass = value;
                             if (value!.isEmpty) {
-                              return 'Enter a password';
-                            } else if (!RegExp(
-                                    r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$")
-                                .hasMatch(value)) {
-                              return 'Enter valid password';
-                            } else {
-                              return null;
-                            }
+                              return 'Enter your Password';
+                            } else {//call function to check password
+                                  bool result = validatePassword(value);
+                                  if(result){
+                                    // create account event
+                                    return null;
+                                  
+                                  }else{
+                                    return " Password should contain: \n - A capital letter \n - A simple letter \n - A number \n - A special character";
+                                  }
+                                }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             hintText: 'Password',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -414,6 +497,25 @@ class _SignupState extends State<Signup> {
               ),
                           ]),
                       ),
+                      Padding(
+                            padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                            child: Visibility (
+                            visible: _isVisible,
+                            child: LinearProgressIndicator(
+                              value: password_strength,
+                              backgroundColor: Colors.grey[300],
+                              minHeight: 5,
+                              color: password_strength <= 1 / 5
+                                  ? Colors.red
+                                   :password_strength <= 2 / 5
+                                  ? Colors.orange
+                                  : password_strength == 3 / 5
+                                  ? Colors.yellow
+                                  : password_strength == 4 / 5
+                                  ? Colors.blue
+                                  : Colors.green,
+                            ),
+              ),),
               Padding( 
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                         child: Column(
@@ -432,15 +534,19 @@ class _SignupState extends State<Signup> {
                             c_password= value;
                           },
                           validator: (String? value) {
+
                             if (value!.isEmpty) {
-                              return 'Confirm Password';
-                            } else if (confirmPass != value) {
-                              return 'Re-Enter New Password';
-                            } else {
+                              return 'Confirm your Password';
+                            } else if (c_password!=password || !validatePassword(c_password)) {
+                              return 'Re-Entered Password didn\'t match';
+                            } else if(c_password==password && validatePassword(c_password)){
                               return null;
                             }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                             hintText: 'Confirm Password',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -486,34 +592,7 @@ class _SignupState extends State<Signup> {
                         ),
                       ],
                     )),
-                    Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Go to next page ",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     new MaterialPageRoute(
-                            //         builder: (context) => Home( name, email, password, token, nic, address, contact_no))
-                            //         );
-                          },
-                          child: Text(
-                            "Upload photo",
-                            style: TextStyle(
-                              fontSize: 16,
-                                color: Color.fromARGB(255, 4, 128, 185),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
+                   
                     SizedBox(
                         height: 15,
                       ),
@@ -538,13 +617,31 @@ class _SignupState extends State<Signup> {
                   //         style: TextStyle(color: Colors.white, fontSize: 20),
                   //       )),
                   // ),
+                  
                     child:Align(
                       alignment: Alignment.center,
                       child: SizedBox(
                         height: 50,
                         width: 300,
                         child: TextButton(
-                          onPressed: () { Navigator.push(
+                          onPressed: () { 
+                            if (_formKey.currentState!.validate()) {
+                              print("ok");
+                              // save();
+                              if(agree == false)
+                              {
+                                Fluttertoast.showToast(
+                                msg: "Agree to our terms and conditions",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                backgroundColor: Colors.red,
+                                textColor:Colors.white,
+                                fontSize:16.0
+                                );
+                              }
+                              if (agree == true) 
+                              {
+                            Navigator.push(
                                 context,
                                 new MaterialPageRoute(
                                     builder: (context) => Home( name, email, password, nic, address, contact_no))
@@ -567,8 +664,17 @@ class _SignupState extends State<Signup> {
                       //             fontSize:16.0
                       // );
                       //           });
-                      //         } 
-                            },
+                      //         }
+                      }
+                             } else {
+                                print("not ok");
+                                
+                              }
+                            {
+                             
+                              } 
+                            }, 
+                            
                             child: Text("Continue", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(
                               primary: Colors.white,  //Text Color
