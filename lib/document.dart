@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:guide_frontend/services/authservice.dart';
