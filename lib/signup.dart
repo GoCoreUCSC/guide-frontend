@@ -47,7 +47,7 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
@@ -486,58 +486,13 @@ class _SignupState extends State<Signup> {
                         ),
                       ],
                     )),
-                    Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 5, 50, 0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Go to next page ",
-                          style: TextStyle(
-                            fontSize: 16,
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     new MaterialPageRoute(
-                            //         builder: (context) => Home( name, email, password, token, nic, address, contact_no))
-                            //         );
-                          },
-                          child: Text(
-                            "Upload photo",
-                            style: TextStyle(
-                              fontSize: 16,
-                                color: Color.fromARGB(255, 4, 128, 185),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    )),
+                    
                     SizedBox(
                         height: 15,
                       ),
                       Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 16),
-                  // child: Container(
-                  //   height: 50,
-                  //   width: 400,
-                  //   child: TextButton(
-                  //       backgroundColor: Colors.blue,
-                  //       shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(16.0)),
-                  //       onPressed: () {
-                  //         if (_formKey.currentState.validate()) {
-                  //           save();
-                  //         } else {
-                  //           print("not ok");
-                  //         }
-                  //       },
-                  //       child: Text(
-                  //         "Signin",
-                  //         style: TextStyle(color: Colors.white, fontSize: 20),
-                  //       )),
-                  // ),
+                  
                     child:Align(
                       alignment: Alignment.center,
                       child: SizedBox(
@@ -549,27 +504,8 @@ class _SignupState extends State<Signup> {
                                 new MaterialPageRoute(
                                     builder: (context) => Home( name, email, password, nic, address, contact_no))
                                     );
-                            // if (_formKey.currentState!.validate()) {
-                            //   print("ok");
-                            //   // save();
-                            //  } else {
-                            //     print("not ok");
-                            //   }
-                      //       {
-                      //        AuthService().addUser(name, email, nic, address,contact_no, password).then((val) {
-                      //            Fluttertoast.showToast(
-                      //             msg: val.data['msg'],
-                      //             toastLength: Toast.LENGTH_SHORT,
-                      //             gravity: ToastGravity.BOTTOM,
-                      //             timeInSecForIosWeb: 1,
-                      //             backgroundColor: Colors.green,
-                      //             textColor:Colors.white,
-                      //             fontSize:16.0
-                      // );
-                      //           });
-                      //         } 
                             },
-                            child: Text("Continue", style: TextStyle(fontSize: 20),),
+                            child: Text("Continue", style: TextStyle(fontSize: 18),),
                             style: TextButton.styleFrom(
                               primary: Colors.white,  //Text Color
                               backgroundColor: Color.fromARGB(255, 4, 128, 185),
@@ -583,124 +519,7 @@ class _SignupState extends State<Signup> {
                 SizedBox(
                         height: 10,
                       ), 
-                //     Padding(
-                //   padding: EdgeInsets.fromLTRB(55, 16, 16, 0),
-                //   // child: Container(
-                //   //   height: 50,
-                //   //   width: 400,
-                //   //   child: TextButton(
-                //   //       backgroundColor: Colors.blue,
-                //   //       shape: RoundedRectangleBorder(
-                //   //           borderRadius: BorderRadius.circular(16.0)),
-                //   //       onPressed: () {
-                //   //         if (_formKey.currentState.validate()) {
-                //   //           save();
-                //   //         } else {
-                //   //           print("not ok");
-                //   //         }
-                //   //       },
-                //   //       child: Text(
-                //   //         "Signin",
-                //   //         style: TextStyle(color: Colors.white, fontSize: 20),
-                //   //       )),
-                //   // ),
-                //     child:Align(
-                //       alignment: Alignment.center,
-                //       child: SizedBox(
-                //         height: 50,
-                //         width: 300,
-                //         child: TextButton(
-                //           onPressed: () {
-                //             // if (_formKey.currentState!.validate()) {
-                //             //   print("ok");
-                //             //   // save();
-                //             //  } else {
-                //             //     print("not ok");
-                //             //   }
-                //             {
-                //             AuthService().addUser(name, password).then((val) {
-                //                 Fluttertoast.showToast(
-                //                   msg: val.data['msg'],
-                //                   toastLength: Toast.LENGTH_SHORT,
-                //                   gravity: ToastGravity.BOTTOM,
-                //                   timeInSecForIosWeb: 1,
-                //                   backgroundColor: Colors.green,
-                //                   textColor:Colors.white,
-                //                   fontSize:16.0
-                //       );
-                //                 });
-                //               } 
-                //             },
-                //             child: Text("Add User", style: TextStyle(fontSize: 20),),
-                //             style: TextButton.styleFrom(
-                //               primary: Colors.white,  //Text Color
-                //               backgroundColor: Color.fromARGB(255, 255, 131, 59),
-                //               shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(16.0)),
-                //             ),
-                //           ),
-                //       ),
-                //     ),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.fromLTRB(55, 16, 16, 0),
-                //   // child: Container(
-                //   //   height: 50,
-                //   //   width: 400,
-                //   //   child: TextButton(
-                //   //       backgroundColor: Colors.blue,
-                //   //       shape: RoundedRectangleBorder(
-                //   //           borderRadius: BorderRadius.circular(16.0)),
-                //   //       onPressed: () {
-                //   //         if (_formKey.currentState.validate()) {
-                //   //           save();
-                //   //         } else {
-                //   //           print("not ok");
-                //   //         }
-                //   //       },
-                //   //       child: Text(
-                //   //         "Signin",
-                //   //         style: TextStyle(color: Colors.white, fontSize: 20),
-                //   //       )),
-                //   // ),
-                //     child:Align(
-                //       alignment: Alignment.center,
-                //       child: SizedBox(
-                //         height: 50,
-                //         width: 300,
-                //         child: TextButton(
-                //           onPressed: () {
-                //             // if (_formKey.currentState!.validate()) {
-                //             //   print("ok");
-                //             //   // save();
-                //             //  } else {
-                //             //     print("not ok");
-                //             //   }
-                //             {
-                //             AuthService().getinfo(token).then((val) {
-                //                 Fluttertoast.showToast(
-                //                   msg: val.data['msg'],
-                //                   toastLength: Toast.LENGTH_SHORT,
-                //                   gravity: ToastGravity.BOTTOM,
-                //                   timeInSecForIosWeb: 1,
-                //                   backgroundColor: Colors.green,
-                //                   textColor:Colors.white,
-                //                   fontSize:16.0
-                //       );
-                //                 });
-                //               } 
-                //             },
-                //             child: Text("Get Info", style: TextStyle(fontSize: 20),),
-                //             style: TextButton.styleFrom(
-                //               primary: Colors.white,  //Text Color
-                //               backgroundColor: Color.fromARGB(255, 255, 131, 59),
-                //               shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(16.0)),
-                //             ),
-                //           ),
-                //       ),
-                //     ),
-                // ),
+                
         ],
                   ),
                 ))
