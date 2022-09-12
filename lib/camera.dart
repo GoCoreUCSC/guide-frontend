@@ -137,6 +137,7 @@ class _HomeState extends State<Home> {
                         
                         const SizedBox(width: 20),
                         
+
                            TextButton(
                               onPressed: ()=> getImage(source: ImageSource.gallery),
                               child: Row(

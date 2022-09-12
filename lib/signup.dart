@@ -591,32 +591,12 @@ class _SignupState extends State<Signup> {
                               color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                       ],
-                    )),
-                   
+                    )),       
                     SizedBox(
                         height: 15,
                       ),
                       Padding(
                   padding: EdgeInsets.fromLTRB(20, 16, 20, 16),
-                  // child: Container(
-                  //   height: 50,
-                  //   width: 400,
-                  //   child: TextButton(
-                  //       backgroundColor: Colors.blue,
-                  //       shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(16.0)),
-                  //       onPressed: () {
-                  //         if (_formKey.currentState.validate()) {
-                  //           save();
-                  //         } else {
-                  //           print("not ok");
-                  //         }
-                  //       },
-                  //       child: Text(
-                  //         "Signin",
-                  //         style: TextStyle(color: Colors.white, fontSize: 20),
-                  //       )),
-                  // ),
                   
                     child:Align(
                       alignment: Alignment.center,
@@ -689,124 +669,7 @@ class _SignupState extends State<Signup> {
                 SizedBox(
                         height: 10,
                       ), 
-                //     Padding(
-                //   padding: EdgeInsets.fromLTRB(55, 16, 16, 0),
-                //   // child: Container(
-                //   //   height: 50,
-                //   //   width: 400,
-                //   //   child: TextButton(
-                //   //       backgroundColor: Colors.blue,
-                //   //       shape: RoundedRectangleBorder(
-                //   //           borderRadius: BorderRadius.circular(16.0)),
-                //   //       onPressed: () {
-                //   //         if (_formKey.currentState.validate()) {
-                //   //           save();
-                //   //         } else {
-                //   //           print("not ok");
-                //   //         }
-                //   //       },
-                //   //       child: Text(
-                //   //         "Signin",
-                //   //         style: TextStyle(color: Colors.white, fontSize: 20),
-                //   //       )),
-                //   // ),
-                //     child:Align(
-                //       alignment: Alignment.center,
-                //       child: SizedBox(
-                //         height: 50,
-                //         width: 300,
-                //         child: TextButton(
-                //           onPressed: () {
-                //             // if (_formKey.currentState!.validate()) {
-                //             //   print("ok");
-                //             //   // save();
-                //             //  } else {
-                //             //     print("not ok");
-                //             //   }
-                //             {
-                //             AuthService().addUser(name, password).then((val) {
-                //                 Fluttertoast.showToast(
-                //                   msg: val.data['msg'],
-                //                   toastLength: Toast.LENGTH_SHORT,
-                //                   gravity: ToastGravity.BOTTOM,
-                //                   timeInSecForIosWeb: 1,
-                //                   backgroundColor: Colors.green,
-                //                   textColor:Colors.white,
-                //                   fontSize:16.0
-                //       );
-                //                 });
-                //               } 
-                //             },
-                //             child: Text("Add User", style: TextStyle(fontSize: 20),),
-                //             style: TextButton.styleFrom(
-                //               primary: Colors.white,  //Text Color
-                //               backgroundColor: Color.fromARGB(255, 255, 131, 59),
-                //               shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(16.0)),
-                //             ),
-                //           ),
-                //       ),
-                //     ),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.fromLTRB(55, 16, 16, 0),
-                //   // child: Container(
-                //   //   height: 50,
-                //   //   width: 400,
-                //   //   child: TextButton(
-                //   //       backgroundColor: Colors.blue,
-                //   //       shape: RoundedRectangleBorder(
-                //   //           borderRadius: BorderRadius.circular(16.0)),
-                //   //       onPressed: () {
-                //   //         if (_formKey.currentState.validate()) {
-                //   //           save();
-                //   //         } else {
-                //   //           print("not ok");
-                //   //         }
-                //   //       },
-                //   //       child: Text(
-                //   //         "Signin",
-                //   //         style: TextStyle(color: Colors.white, fontSize: 20),
-                //   //       )),
-                //   // ),
-                //     child:Align(
-                //       alignment: Alignment.center,
-                //       child: SizedBox(
-                //         height: 50,
-                //         width: 300,
-                //         child: TextButton(
-                //           onPressed: () {
-                //             // if (_formKey.currentState!.validate()) {
-                //             //   print("ok");
-                //             //   // save();
-                //             //  } else {
-                //             //     print("not ok");
-                //             //   }
-                //             {
-                //             AuthService().getinfo(token).then((val) {
-                //                 Fluttertoast.showToast(
-                //                   msg: val.data['msg'],
-                //                   toastLength: Toast.LENGTH_SHORT,
-                //                   gravity: ToastGravity.BOTTOM,
-                //                   timeInSecForIosWeb: 1,
-                //                   backgroundColor: Colors.green,
-                //                   textColor:Colors.white,
-                //                   fontSize:16.0
-                //       );
-                //                 });
-                //               } 
-                //             },
-                //             child: Text("Get Info", style: TextStyle(fontSize: 20),),
-                //             style: TextButton.styleFrom(
-                //               primary: Colors.white,  //Text Color
-                //               backgroundColor: Color.fromARGB(255, 255, 131, 59),
-                //               shape: RoundedRectangleBorder(
-                //               borderRadius: BorderRadius.circular(16.0)),
-                //             ),
-                //           ),
-                //       ),
-                //     ),
-                // ),
+                
         ],
                   ),
                 ))
