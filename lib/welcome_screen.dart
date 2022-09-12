@@ -32,7 +32,7 @@ class _WelcomeState extends State<Welcome> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 45,
+                                fontSize: 42,
                                 color: Color.fromARGB(255, 4, 128, 185)),
                           ),
           ),
@@ -45,8 +45,9 @@ class _WelcomeState extends State<Welcome> {
                       
                           child: Text(
                             "Thank You for Signing Up with us",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 20,
                                 color: Colors.black, fontWeight: FontWeight.bold),
                           ),
                           ),
@@ -57,6 +58,7 @@ class _WelcomeState extends State<Welcome> {
                 padding: EdgeInsets.all(20),
                 child: Image.asset(
                 'images/withSlogan.png',
+                height: 300, width: 300,
                 //fit: BoxFit.fitHeight,
                 ),
               ),
@@ -86,9 +88,9 @@ class _WelcomeState extends State<Welcome> {
                   child: const Text('Proceed to Sign In',
                   overflow: TextOverflow.visible,
                   style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         color: Colors.white,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                       )),
               ),
             ),

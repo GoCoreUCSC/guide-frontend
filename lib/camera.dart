@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:guide_frontend/document.dart';
 import 'package:guide_frontend/signin.dart';
+import 'package:guide_frontend/welcome_screen.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,104 +38,165 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Capturing Images'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if(imageFile != null)
-              Container(
-                width: 640,
-                height: 480,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  image: DecorationImage(
-                    image: FileImage(imageFile!),
-                    fit: BoxFit.cover
-                  ),
-                  border: Border.all(width: 8, color: Colors.black),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              )
-            else
-              Container(
-                width: 640,
-                height: 480,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(width: 8, color: Colors.black12),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: const Text('Image should appear here', style: TextStyle(fontSize: 26),),
-              ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
+      // appBar: AppBar(
+      //   title: const Text('Capturing Images'),
+      //   centerTitle: true,
+      // ),
+      body: ListView(
+        
+        children: [
+          const SizedBox(
+                        height: 15,
+                      ),  
+                      Container(
+                      padding: EdgeInsets.only(right:300.0),
+                      child: Image.asset('images/withoutSlogan.png',
+                          height: 100, width: 150, ),
+                    ),
+                    SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 30, top: 0,right: 30, bottom: 0,),
+                        child: const Text(
+                          "We would like to have a profile photo of you",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,   
+                              color: Color.fromARGB(255, 4, 128, 185)),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: ()=> getImage(source: ImageSource.camera),
-                      child: const Text('Capture Image', style: TextStyle(fontSize: 18))
+                if(imageFile != null)
+                  Container(
+                    width: 350,
+                    height: 400,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      //color: Colors.grey,
+                      image: DecorationImage(
+                        image: FileImage(imageFile!),
+                        //fit: BoxFit.cover
+                      ),
+                      //border: Border.all(width: 1, color: Colors.black),
+                      //borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  )
+                else
+                  Container(
+                    width: 350,
+                    height: 400,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 207, 207, 207),
+                      border: Border.all(width: 1, color: Colors.black12),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: const Text(
+                      'No photo available', 
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14),),
                   ),
+                const SizedBox(
+                  height: 35,
                 ),
-                const SizedBox(width: 20,),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: ()=> getImage(source: ImageSource.gallery),
-                      child: const Text('Select Image', style: TextStyle(fontSize: 18))
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () 
-                      async {
-                        {
-                          try {
-                            //  print(imageFile!.path);
-    CloudinaryResponse response = await cloudinary.uploadFile(
-        CloudinaryFile.fromFile(imageFile!.path, resourceType: CloudinaryResourceType.Image),
-    );
-    setState(() {
-       base64Image=response.secureUrl;
-      });
-    
-        print(response.secureUrl);
-    } on CloudinaryException catch (e) {
-      print(e.message);
-      print(e.request);
-    }
-                      //        AuthService().addUser(name, email, password, nic, address, contact_no, base64Image);
-                      // //        .then((val) {
-                      // //            Fluttertoast.showToast(
-                      // //             msg: val.data['msg'],
-                      // //             toastLength: Toast.LENGTH_SHORT,
-                      // //             gravity: ToastGravity.BOTTOM,
-                      // //             timeInSecForIosWeb: 1,
-                      // //             backgroundColor: Colors.green,
-                      // //             textColor:Colors.white,
-                      // //             fontSize:16.0
-                      // // );
-                      //           // },
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                       ElevatedButton(
+                              onPressed: ()=> getImage(source: ImageSource.camera),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                   Text('Capture Photo', style: TextStyle(fontSize: 12)),
+                                   SizedBox(width: 5),
+                                   Icon(
+                                      Icons.camera_alt_rounded,
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                ],
+                              )
+                          ),
+                        
+                        const SizedBox(width: 20),
+                        
+                           ElevatedButton(
+                              onPressed: ()=> getImage(source: ImageSource.gallery),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text('Select Photo', style: TextStyle(fontSize: 12)),
+                                  SizedBox(width: 5),
+                                   Icon(
+                                      Icons.image_rounded,
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                ],
+                              )
+                          ),
+                        
+                        
+                      ],
+                    ),
+                    SizedBox(height: 30),
+          Container(
+            margin: const EdgeInsets.all(5),
+              width: 290,
+              height: 50,
+            child: ElevatedButton(
+                            onPressed: () 
+                            async {
+                              {
+                                try {
+                                  //  print(imageFile!.path);
+                                CloudinaryResponse response = await cloudinary.uploadFile(
+                                        CloudinaryFile.fromFile(imageFile!.path, resourceType: CloudinaryResourceType.Image),
+                                );
+                                setState(() {
+                                      base64Image=response.secureUrl;
+                                      });
+                                
+                                        print(response.secureUrl);
+                                } on CloudinaryException catch (e) {
+                                      print(e.message);
+                                      print(e.request);
+                                }
+                           
                                 Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Document(name, email, password, nic, address, contact_no, base64Image)
                                 ));
-                              } 
-                      },
-                      child: const Text('Continue', style: TextStyle(fontSize: 18))
-                  ),
-                )
+                                    } 
+                            },
+                            child: Text("Continue", style: TextStyle(fontSize: 18),),
+                              style: TextButton.styleFrom(
+                                primary: Colors.white,  //Text Color
+                                
+                                backgroundColor: Color.fromARGB(255, 4, 128, 185),
+                                shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                              ),
+                        ),
+          ),
+                    
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -152,52 +214,8 @@ class _HomeState extends State<Home> {
       setState(() {
         imageFile = File(file!.path);
       });
-    }
-    //  base64Image= base64Encode(await File(file!.path).readAsBytes());
-    // final bytes = File(imageFile!.path).readAsBytesSync();
-    //  base64Image =  base64Encode(bytes);
-
-//     List<int> imageBytes = await File(file!.path).readAsBytesSync();
-// print(imageBytes);
-// String base64Image = base64Encode(imageBytes);
-
-//     print("img_pan : $base64Image");
-     
+    } 
     
   }
-
-
-
-
-
-  // upload(File imageFile) async {    
-  //     // open a bytestream
-  //     var stream =  http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-  //     // get file length
-  //     var length = await imageFile.length();
-
-  //     // string to uri
-  //     var uri = Uri.parse("http://ip:8082/composer/predict");
-
-  //     // create multipart request
-  //     var request = new http.MultipartRequest("POST", uri);
-
-  //     // multipart that takes file
-  //     var multipartFile = new http.MultipartFile('file', stream, length,
-  //         filename: basename(imageFile.path));
-
-  //     // add file to multipart
-  //     request.files.add(multipartFile);
-
-  //     // send
-  //     var response = await request.send();
-  //     print(response.statusCode);
-
-  //     // listen for response
-  //     response.stream.transform(utf8.decoder).listen((value) {
-  //       print(value);
-  //     });
-  //   }
-
 
 }
