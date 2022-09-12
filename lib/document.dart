@@ -63,12 +63,12 @@ late PageController _pageController;
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                              fontSize: 24,
                               color: Color.fromARGB(255, 4, 128, 185)),
                         ),
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 35,
                       ),
 
                 
@@ -110,7 +110,7 @@ late PageController _pageController;
                   )
                 else
                   Container(
-                    width: 380,
+                    width: 350,
                     height: 420,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -121,13 +121,13 @@ late PageController _pageController;
                     child: const Text(
                       'No documents available', 
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14),),
+                      style: TextStyle(fontSize: 16),),
                   ),
                         ],
                     ),
                   ),
                   const SizedBox(
-                        height: 25,
+                        height: 20,
                       ),
 
 
@@ -145,7 +145,7 @@ late PageController _pageController;
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Scan document", style: TextStyle(fontSize: 14),),
+                                Text("Scan document", style: TextStyle(fontSize: 16),),
                                 SizedBox(width: 5),
                                    Icon(
                                       Icons.sim_card_download_rounded,
@@ -164,9 +164,7 @@ late PageController _pageController;
                       ),
                     ),
                 ),
-                const SizedBox(
-                        height: 12,
-                      ),
+
 
 
                    Padding(
@@ -175,8 +173,8 @@ late PageController _pageController;
                     child:Align(
                       alignment: Alignment.center,
                       child: SizedBox(
-                        height: 40,
-                        width: 250,
+                        height: 50,
+                        width: 290,
                         child: TextButton(
                           onPressed:  () async {
                             try {
@@ -198,7 +196,7 @@ late PageController _pageController;
                                     MaterialPageRoute(builder: (context) => Welcome()
                                     ));
                                   }, 
-                            child: Text("Sign Up", style: TextStyle(fontSize: 18),),
+                            child: Text("Sign Up", style: TextStyle(fontSize: 20),),
                             style: TextButton.styleFrom(
                               primary: Colors.white,  //Text Color
                               backgroundColor: Color.fromARGB(255, 4, 128, 185),

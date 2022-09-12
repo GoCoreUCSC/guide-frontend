@@ -86,7 +86,7 @@ class _SigninState extends State<Signin> {
                   height: 20,
                 ),
                 Text(
-                  "Sign In - Guide",
+                  "Sign In",
                   style: GoogleFonts.radioCanada(
                       fontWeight: FontWeight.bold,
                       fontSize: 45,
@@ -104,16 +104,15 @@ class _SigninState extends State<Signin> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter something';
-                      } else if (RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value)) {
-                        return null;
+                        return 'Enter your email';
                       } else {
-                        return 'Enter valid Username';
+                        return 'Enter a valid email';
                       }
                     },
                     decoration: InputDecoration(
+                      errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                       hintText: 'Username',
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -144,16 +143,15 @@ class _SigninState extends State<Signin> {
                     },
                     validator: (String? value) {
                       if (value!.isEmpty) {
-                        return 'Enter something';
-                      } else if (RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value)) {
-                        return null;
+                        return 'Enter your password';
                       } else {
                         return null;
                       }
                     },
                     decoration: InputDecoration(
+                      errorStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
                       hintText: 'Password',
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -215,7 +213,7 @@ class _SigninState extends State<Signin> {
                       width: 300,
                       child: TextButton(
                         onPressed: () {
-                          // if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
                           //   print("ok");
                           //   // save();
                           //  } else {
@@ -251,7 +249,7 @@ class _SigninState extends State<Signin> {
                               }
                             });
                           }
-                        },
+                        }},
                         child: Text(
                           "Login",
                           style: TextStyle(fontSize: 20),

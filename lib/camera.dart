@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 17,   
+                              fontSize: 24,   
                               color: Color.fromARGB(255, 4, 128, 185)),
                         ),
                       ),
@@ -103,7 +103,7 @@ class _HomeState extends State<Home> {
                     child: const Text(
                       'No photo available', 
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14),),
+                      style: TextStyle(fontSize: 16),),
                   ),
                 const SizedBox(
                   height: 35,
@@ -113,12 +113,12 @@ class _HomeState extends State<Home> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                       ElevatedButton(
+                       TextButton(
                               onPressed: ()=> getImage(source: ImageSource.camera),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                   Text('Capture Photo', style: TextStyle(fontSize: 12)),
+                                   Text('Capture Photo', style: TextStyle(fontSize: 16)),
                                    SizedBox(width: 5),
                                    Icon(
                                       Icons.camera_alt_rounded,
@@ -126,17 +126,24 @@ class _HomeState extends State<Home> {
                                       color: Colors.white,
                                     ),
                                 ],
-                              )
+                              ),
+                              style: TextButton.styleFrom(
+                              primary: Colors.white,  //Text Color
+                              backgroundColor: Color.fromARGB(118, 4, 128, 185),
+                              shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                            ),
                           ),
                         
                         const SizedBox(width: 20),
                         
-                           ElevatedButton(
+
+                           TextButton(
                               onPressed: ()=> getImage(source: ImageSource.gallery),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text('Select Photo', style: TextStyle(fontSize: 12)),
+                                  const Text('Select Photo', style: TextStyle(fontSize: 16)),
                                   SizedBox(width: 5),
                                    Icon(
                                       Icons.image_rounded,
@@ -144,7 +151,13 @@ class _HomeState extends State<Home> {
                                       color: Colors.white,
                                     ),
                                 ],
-                              )
+                              ),
+                              style: TextButton.styleFrom(
+                              primary: Colors.white,  //Text Color
+                              backgroundColor: Color.fromARGB(118, 4, 128, 185),
+                              shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                            ),
                           ),
                         
                         
@@ -180,7 +193,7 @@ class _HomeState extends State<Home> {
                                 ));
                                     } 
                             },
-                            child: Text("Continue", style: TextStyle(fontSize: 18),),
+                            child: Text("Continue", style: TextStyle(fontSize: 20),),
                               style: TextButton.styleFrom(
                                 primary: Colors.white,  //Text Color
                                 

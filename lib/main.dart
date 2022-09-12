@@ -31,10 +31,11 @@ void main() {
         colorScheme:
             ThemeData().colorScheme.copyWith(primary: Color(0xFF0084BD)),
         fontFamily: 'Roboto',
+
       ),
       debugShowCheckedModeBanner: false,
 
-       home: Signin()
+      //  home: Signin()
       // home: MainPageGuide()
       // home:Tours()
       // home:Home()
@@ -45,5 +46,6 @@ void main() {
       //  home: Camera()
       // home: Home()
       //  home: Document()
+      home: MyHomePage()
       ));
 }
