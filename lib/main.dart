@@ -10,7 +10,7 @@ import 'package:guide_frontend/main_page.dart';
 import 'package:guide_frontend/signin.dart';
 import 'package:guide_frontend/welcome.dart';
 
-import 'camera.dart';
+// import 'camera.dart';
 // import 'activitySelection.dart';
 // import 'booking_page.dart';
 // import 'launchscreen.dart';
