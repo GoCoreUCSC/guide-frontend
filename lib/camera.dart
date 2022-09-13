@@ -100,10 +100,26 @@ class _HomeState extends State<Home> {
                       border: Border.all(width: 1, color: Colors.black12),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    child: const Text(
-                      'No photo available', 
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),),
+                    
+                    child: 
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(60,20,60,20),
+                              child: Icon(Icons.image_search_outlined, color: Color.fromARGB(172, 255, 255, 255),size: 80),
+                            ),
+                          ),
+                          TextSpan(text: '\n        No photo available', style: TextStyle(fontSize: 16, color: Color.fromARGB(115, 0, 0, 0))),
+                        ],
+                      ),
+                    )
+                  //    const Text(
+                  //     'No photo available', 
+                  //     textAlign: TextAlign.center,
+                  //     style: TextStyle(fontSize: 16),),
+                  // ),
                   ),
                 const SizedBox(
                   height: 35,
@@ -123,12 +139,12 @@ class _HomeState extends State<Home> {
                                    Icon(
                                       Icons.camera_alt_rounded,
                                       size: 25,
-                                      color: Colors.white,
+                                      color: Color.fromARGB(255, 4, 128, 185),
                                     ),
                                 ],
                               ),
                               style: TextButton.styleFrom(
-                              primary: Colors.white,  //Text Color
+                              primary: Color.fromARGB(255, 4, 128, 185),  //Text Color
                               backgroundColor: Color.fromARGB(118, 4, 128, 185),
                               shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -148,12 +164,12 @@ class _HomeState extends State<Home> {
                                    Icon(
                                       Icons.image_rounded,
                                       size: 25,
-                                      color: Colors.white,
+                                      color: Color.fromARGB(255, 4, 128, 185),
                                     ),
                                 ],
                               ),
                               style: TextButton.styleFrom(
-                              primary: Colors.white,  //Text Color
+                              primary: Color.fromARGB(255, 4, 128, 185),  //Text Color
                               backgroundColor: Color.fromARGB(118, 4, 128, 185),
                               shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),

@@ -117,10 +117,24 @@ late PageController _pageController;
                       border: Border.all(width: 1, color: Colors.black12),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    child: const Text(
-                      'No documents available', 
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),),
+                    child: 
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          WidgetSpan(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(60,20,60,20),
+                              child: Icon(Icons.document_scanner_outlined, color: Color.fromARGB(172, 255, 255, 255),size: 80),
+                            ),
+                          ),
+                          TextSpan(text: '\n     No documents available', style: TextStyle(fontSize: 16, color: Color.fromARGB(115, 0, 0, 0))),
+                        ],
+                      ),
+                    )
+                    // const Text(
+                    //   'No documents available', 
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(fontSize: 16),),
                   ),
                         ],
                     ),
@@ -149,12 +163,12 @@ late PageController _pageController;
                                    Icon(
                                       Icons.sim_card_download_rounded,
                                       size: 24,
-                                      color: Colors.white,
+                                      color: Color.fromARGB(255, 4, 128, 185),
                                     ),
                               ],
                             ),
                             style: TextButton.styleFrom(
-                              primary: Colors.white,  //Text Color
+                              primary: Color.fromARGB(255, 4, 128, 185),  //Text Color
                               backgroundColor: Color.fromARGB(118, 4, 128, 185),
                               shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
