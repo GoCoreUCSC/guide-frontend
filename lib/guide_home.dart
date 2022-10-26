@@ -1,19 +1,78 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'check_requests.dart';
 import 'check_schedule.dart';
 
 class GuideHome extends StatefulWidget {
-  const GuideHome({Key? key}) : super(key: key);
+  String name, token;
+  var img, id;
+  GuideHome(this.name, this.token, this.img, this.id);
 
   @override
-  State<GuideHome> createState() => _GuideHomeState();
+  State<GuideHome> createState() { 
+    return _GuideHomeState(this.name,this.token, this.img, this.id );
+    }
 }
 
 class _GuideHomeState extends State<GuideHome> {
+  String name, token;
+  var img,id;
+  var image;
+  _GuideHomeState(this.name,this.token, this.img, this.id);
+    late Response response;
+  Dio dio = Dio();
+
+  bool error = false; //for error status
+  bool loading = false; //for data featching status
+  String errmsg = ""; //to assing any error message from API/runtime
+  // var apidata; //for decoded JSON data
+
+  List<dynamic> _plan= [];
+  List<dynamic> _tourist= [];
+  List<dynamic> _booking= [];
+    getData() async {
+    setState(() {
+      loading = true; //make loading true to show progressindicator
+    });
+    print(image);
+    print(img);
+    String url =
+        "https://gocore.herokuapp.com/viewOngoingPlan/$id";
+    //don't use "http://localhost/" use local IP or actual live URL
+
+    Response response = await dio.get(url);
+    Map<String, dynamic> map = response.data;
+      _plan = map["plan"];
+      _tourist = map["tourist"];
+      _booking = map["booking"];//get JSON decoded data from response
+    // _allUsers= apidata;
+    if (response.statusCode == 200) {
+      //fetch successful
+      // if(apidata["error"]){ //Check if there is error given on JSON
+      //     error = true;
+      //     errmsg  = apidata["msg"]; //error message from JSON
+      // }
+    } else {
+      error = true;
+      errmsg = "Error while fetching data.";
+    }
+
+    loading = false;
+    setState(() {}); //refresh UI v
+   
+    // id = _user[0]["_id"];
+   
+  }
+    @override
+  void initState() {
+    getData(); //fetching data
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -36,16 +95,18 @@ class _GuideHomeState extends State<GuideHome> {
                       width: height * 0.082,
                       height: height * 0.082,
                       decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage("images/dummy.png"),
+                        image:  DecorationImage(
+                          image: 
+                          //AssetImage("images/dummy.png"),
+                          NetworkImage(img),
                         ),
                         borderRadius: BorderRadius.circular(height * 0.082),
                         color: Colors.grey.withOpacity(0.5),
                       ),
                     ),
                     SizedBox(width: width * 0.0243),
-                    const Text(
-                      "Hello\nJack!",
+                    Text(
+                      "Hello\n"+name+" !!",
                       style: TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,
@@ -172,7 +233,18 @@ class _GuideHomeState extends State<GuideHome> {
                           ),
                           SizedBox(height: height * 0.0205),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                                const url = 'https://ugvle.ucsc.cmb.ac.lk/';
+                                if(await canLaunch(url)){
+                                  await launch(
+                                    url, 
+                                    // forceWebView = true,       //enables WebView
+                                    // enableJavaScript = false  //disables JavaScript
+                                  );  
+                                }else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
                             style: ElevatedButton.styleFrom(
                                 primary: const Color.fromARGB(255, 4, 128, 185),
                                 padding: EdgeInsets.symmetric(
@@ -216,7 +288,7 @@ class _GuideHomeState extends State<GuideHome> {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const CheckSchedule()));
+                                     CheckSchedule(id)));
                           },
                           child: Card(
                             elevation: 5,
@@ -255,7 +327,7 @@ class _GuideHomeState extends State<GuideHome> {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const CheckRequests()));
+                                     CheckRequests(id)));
                           },
                           child: Card(
                             elevation: 5,
@@ -572,19 +644,20 @@ class _GuideHomeState extends State<GuideHome> {
                                   shape: BoxShape.circle,
                                   image: const DecorationImage(
                                     image: AssetImage("images/dummy.png"),
+                                    //NetworkImage(_tourist[0]['img']),
                                   ),
                                 ),
                               ),
                               SizedBox(height: 5),
-                              const Text(
-                                "Bright Ray",
+                               Text(
+                                _tourist[0]['name'],
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 17),
                               ),
                               SizedBox(height: 5),
-                              const Text("3 Days"),
+                               Text(_plan[0]['duration'].toString()+'days'),
                               SizedBox(height: 5),
-                              const Text("August 28th, 2022"),
+                               Text(_booking[0]['startDate'].toString().split('T')[0]),
                             ],
                           ),
                           Column(
@@ -597,8 +670,8 @@ class _GuideHomeState extends State<GuideHome> {
                                     width: width * 0.218,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      image: const DecorationImage(
-                                        image:
+                                      image:  DecorationImage(
+                                        image: //NetworkImage(_plan[0]['img'])
                                             AssetImage("images/Hikkaduwa.webp"),
                                         fit: BoxFit.cover,
                                       ),
@@ -624,8 +697,8 @@ class _GuideHomeState extends State<GuideHome> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          children: const [
-                                            Text("4.8"),
+                                          children:  [
+                                            Text(_plan[0]['rating'].toString()),
                                             Icon(
                                               Icons.star,
                                               color: Color.fromARGB(
@@ -640,8 +713,8 @@ class _GuideHomeState extends State<GuideHome> {
                                 ],
                               ),
                               SizedBox(height: 5),
-                              const Text(
-                                "Hikkaduwa Diving",
+                              Text(
+                                _plan[0]['planName'],
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 17),
                               ),

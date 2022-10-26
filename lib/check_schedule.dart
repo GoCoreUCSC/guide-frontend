@@ -1,16 +1,72 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CheckSchedule extends StatefulWidget {
-  const CheckSchedule({Key? key}) : super(key: key);
+
+  var id;
+   CheckSchedule(this.id);
 
   @override
-  State<CheckSchedule> createState() => _CheckScheduleState();
+  
+  State<CheckSchedule> createState() { 
+    return _CheckScheduleState(this.id );
+    }
 }
 
 class _CheckScheduleState extends State<CheckSchedule> {
+  var id;
+_CheckScheduleState(this.id);
+      late Response response;
+  Dio dio = Dio();
+
+  bool error = false; //for error status
+  bool loading = false; //for data featching status
+  String errmsg = ""; //to assing any error message from API/runtime
+  // var apidata; //for decoded JSON data
+
+  List<dynamic> _plan= [];
+  List<dynamic> _tourist= [];
+  List<dynamic> _booking= [];
+    getData() async {
+    setState(() {
+      loading = true; //make loading true to show progressindicator
+    });
+
+    String url =
+        "https://gocore.herokuapp.com/viewOngoingPlan/$id";
+    //don't use "http://localhost/" use local IP or actual live URL
+
+    Response response = await dio.get(url);
+    Map<String, dynamic> map = response.data;
+      _plan = map["plan"];
+      _tourist = map["tourist"];
+      _booking = map["booking"];//get JSON decoded data from response
+    // _allUsers= apidata;
+    if (response.statusCode == 200) {
+      //fetch successful
+      // if(apidata["error"]){ //Check if there is error given on JSON
+      //     error = true;
+      //     errmsg  = apidata["msg"]; //error message from JSON
+      // }
+    } else {
+      error = true;
+      errmsg = "Error while fetching data.";
+    }
+
+    loading = false;
+    setState(() {}); //refresh UI v
+   
+    // id = _user[0]["_id"];
+   
+  }
+    @override
+  void initState() {
+    getData(); //fetching data
+    super.initState();
+  }
   CalendarFormat format = CalendarFormat.month;
   @override
   Widget build(BuildContext context) {
@@ -19,21 +75,23 @@ class _CheckScheduleState extends State<CheckSchedule> {
     var width = size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      // appBar: AppBar(
+      //   //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      //   // elevation: 0,
+      //   // leading: IconButton(
+      //   //   icon: const Icon(
+      //   //     Icons.arrow_back,
+      //   //     color: Colors.black,
+      //   //   ),
+      //   //   onPressed: () {
+      //   //     Navigator.pop(context);
+      //   //   },
+      //   // ),
+      //   automaticallyImplyLeading:false
+      // ),
       body: ListView(
         children: [
+          SizedBox(height: 20,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -46,7 +104,7 @@ class _CheckScheduleState extends State<CheckSchedule> {
                     Row(
                       children: [
                         const Text(
-                          "09",
+                          "25",
                           style: TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.w500,
@@ -57,14 +115,14 @@ class _CheckScheduleState extends State<CheckSchedule> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Friday",
+                              "Wednesday",
                               style: TextStyle(
                                 color: Colors.grey.withOpacity(0.7),
                               ),
                             ),
                             SizedBox(height: height * 0.0041),
                             Text(
-                              "Aug 2022",
+                              "Oct 2022",
                               style: TextStyle(
                                 color: Colors.grey.withOpacity(0.7),
                               ),
@@ -144,7 +202,7 @@ class _CheckScheduleState extends State<CheckSchedule> {
               Container(
                 margin: EdgeInsets.only(left: width * 0.0485),
                 child: const Text(
-                  "Popular Destinations",
+                  "Upcoming Tours",
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 16, 120, 168),

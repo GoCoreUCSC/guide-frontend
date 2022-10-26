@@ -1,55 +1,111 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:guide_frontend/profile_page.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  String name, token;
+  EditProfile(this.name, this.token);
+  //const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<EditProfile> createState() {
+     return _EditProfileState(this.name,this.token); 
+  }
 }
 
 class _EditProfileState extends State<EditProfile> {
+    String name, token;
+  _EditProfileState(this.name,this.token);
+
+var image;
+   late Response response;
+  Dio dio = Dio();
+
+  bool error = false; //for error status
+  bool loading = false; //for data featching status
+  String errmsg = ""; //to assing any error message from API/runtime
+  // var apidata; //for decoded JSON data
+
+  List<dynamic> _user = [];
+    getData() async {
+    setState(() {
+      loading = true; //make loading true to show progressindicator
+    });
+    print(image);
+    
+    String url =
+        "https://gocore.herokuapp.com/viewGuide/$token";
+    //don't use "http://localhost/" use local IP or actual live URL
+
+    Response response = await dio.get(url);
+    _user = response.data; //get JSON decoded data from response
+    // _allUsers= apidata;
+    if (response.statusCode == 200) {
+      //fetch successful
+      // if(apidata["error"]){ //Check if there is error given on JSON
+      //     error = true;
+      //     errmsg  = apidata["msg"]; //error message from JSON
+      // }
+    } else {
+      error = true;
+      errmsg = "Error while fetching data.";
+    }
+
+    loading = false;
+    setState(() {}); //refresh UI v
+    print(_user);
+    // id = _user[0]["_id"];
+    image = _user[0]["image"];
+  }
+    @override
+  void initState() {
+    getData(); //fetching data
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => const ProfilePage()));
-          },
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //       color: Colors.black,
+      //     ),
+      //     onPressed: () {
+      //       Navigator.of(context).push(MaterialPageRoute(
+      //           builder: (BuildContext context) => ProfilePage(name,token)));
+      //     },
+      //   ),
+      // ),
       body: Container(
         child: ListView(
           children: [
+            SizedBox(height: 20,),
             Container(
               width: 120,
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                image: const DecorationImage(
-                  image: AssetImage("images/dummy.png"),
+                image:  DecorationImage(
+                  image: NetworkImage(_user[0]["image"]),
+                  //fit: BoxFit.fill,
                 ),
                 color: Colors.grey.withOpacity(0.1),
               ),
             ),
             const SizedBox(height: 15),
-            const Text(
-              "Jack London",
+             Text(
+              _user[0]["name"],
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w500,
-                  color: Colors.deepOrangeAccent),
+                  color: Color.fromARGB(255, 16, 120, 168)),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -91,10 +147,10 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ],
                     ),
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(15.0),
                       child: Text(
-                        "Jack London",
+                        _user[0]["name"],
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -135,10 +191,10 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ],
                     ),
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(15.0),
                       child: Text(
-                        "jack.london@gmail.com",
+                        token,
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -179,10 +235,10 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ],
                     ),
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(15.0),
                       child: Text(
-                        "+94775157385",
+                        _user[0]["contact_no"],
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -223,10 +279,10 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ],
                     ),
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(15.0),
                       child: Text(
-                        "Sector 3, Magarpatta City, Pune",
+                        _user[0]["address"],
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -242,7 +298,7 @@ class _EditProfileState extends State<EditProfile> {
               width: 100,
               margin: const EdgeInsets.only(left: 100, right: 100),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 23, 2, 247),
+                color: Color.fromARGB(255, 16, 120, 168),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: GestureDetector(

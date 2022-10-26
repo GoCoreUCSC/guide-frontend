@@ -239,7 +239,8 @@ class _SigninState extends State<Signin> {
                                     // print(val.data['msg']);
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
-                                            builder: (context) => GuideHome()));
+                                            builder: (context) => 
+                                            MainPageGuide(val.data['msg'],email)));
                                     // TouristHome(val.data['msg'],token)));
 
                                   } else {

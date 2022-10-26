@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -5,13 +6,65 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'edit_profile.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  String name, token;
+  ProfilePage(this.name, this.token);
+  //const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfilePage> createState() {
+     return _ProfilePageState(this.name,this.token); 
+  }
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+    String name, token;
+  _ProfilePageState(this.name,this.token);
+var image;
+   late Response response;
+  Dio dio = Dio();
+
+  bool error = false; //for error status
+  bool loading = false; //for data featching status
+  String errmsg = ""; //to assing any error message from API/runtime
+  // var apidata; //for decoded JSON data
+
+  List<dynamic> _user = [];
+    getData() async {
+    setState(() {
+      loading = true; //make loading true to show progressindicator
+    });
+    print(image);
+    
+    String url =
+        "https://gocore.herokuapp.com/viewGuide/$token";
+    //don't use "http://localhost/" use local IP or actual live URL
+
+    Response response = await dio.get(url);
+    _user = response.data; //get JSON decoded data from response
+    // _allUsers= apidata;
+    if (response.statusCode == 200) {
+      //fetch successful
+      // if(apidata["error"]){ //Check if there is error given on JSON
+      //     error = true;
+      //     errmsg  = apidata["msg"]; //error message from JSON
+      // }
+    } else {
+      error = true;
+      errmsg = "Error while fetching data.";
+    }
+
+    loading = false;
+    setState(() {}); //refresh UI v
+    print(_user);
+    // id = _user[0]["_id"];
+    image = _user[0]["image"];
+  }
+    @override
+  void initState() {
+    getData(); //fetching data
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -79,8 +132,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: height * 0.12,
                         height: height * 0.12,
                         decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: AssetImage("images/dummy.png"),
+                          image: DecorationImage(
+                            image: NetworkImage(_user[0]["image"]),
                           ),
                           borderRadius: BorderRadius.circular(height * 0.12),
                           color: Colors.white,
@@ -92,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Jack London",
+                            name,
                             style: TextStyle(
                               fontSize: width * 0.055,
                               fontWeight: FontWeight.bold,
@@ -100,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           Text(
-                            "jack.london@gmail.com",
+                            token,
                             style: TextStyle(
                               // shadows: const [
                               //   Shadow(
@@ -124,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const EditProfile()));
+                                EditProfile(name,token)));
                       },
                       child: Icon(
                         Icons.edit,
@@ -212,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      const EditProfile()));
+                                     EditProfile(name,token)));
                             },
                             child: const Icon(
                               Icons.arrow_forward_ios,
